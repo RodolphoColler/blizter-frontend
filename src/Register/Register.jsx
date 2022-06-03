@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import register from '../services/register';
 import './Register.css';
 
@@ -8,6 +9,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [formError, setFormError] = useState('');
+  const navigate = useNavigate();
 
   function validateForm() {
     const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,6 +29,7 @@ function Register() {
       validateForm();
       const token = await register({ email, name, password });
       localStorage.setItem('token', token);
+      navigate('/wallet');
     } catch (error) {
       setFormError(error.message);
     }
