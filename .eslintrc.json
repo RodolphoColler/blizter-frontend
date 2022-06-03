@@ -2,6 +2,8 @@
   "root": true,
   "extends": ["trybe-frontend"],
   "rules": {
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-max-depth": "off",
+    "max-len": "off"
   }
 }
