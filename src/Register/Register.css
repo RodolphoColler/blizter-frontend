@@ -49,14 +49,15 @@ aside > div {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 52vh;
-  width: 25vw;
+  height: 410px;
+  width: 370px;
 }
 
 .register-form {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  position: relative;
   width: 80%;
   height: 100%;
   border-radius: 8px;
@@ -86,10 +87,8 @@ input:-webkit-autofill {
 }
 
 input {
-  border: none;
-  outline: none;
+  all: unset;
   height: 100%;
-  text-align: initial;
   background-color: transparent;
   margin-left: 5px;
   width: 100%;
@@ -98,23 +97,26 @@ input {
   color: #f1f0f3;
 }
 
+.form-error {
+  position: absolute;
+  top: 330px;
+  color: #e55959;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
 form button {
-  margin-top: 30px;
+  margin-top: 50px;
   background-color: #4685c1;
   color: #dcdbdf;
   font-size: 15px;
-  height: 50px;
+  height: 60px;
   border-radius: 10px;
   transition: 0.2s;
 }
 
 form button:hover {
-  margin-top: 30px;
   background-color: #4f8fca;
   transition: 0.2s;
-  color: #dcdbdf;
-  font-size: 15px;
-  height: 50px;
-  border-radius: 10px;
   cursor: pointer;
 }
