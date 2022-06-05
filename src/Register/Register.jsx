@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import register from '../services/register';
+import register from '../services/axiosPost';
 import './Register.css';
 
 function Register() {
@@ -27,7 +27,8 @@ function Register() {
 
     try {
       validateForm();
-      const token = await register({ email, name, password });
+      const endpoint = '/user';
+      const { token } = await register(endpoint, { email, name, password });
       localStorage.setItem('token', token);
       navigate('/wallet');
     } catch (error) {
