@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import Register from './Register';
 import Wallet from './Wallet';
+import Login from './Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <App /> } />
+        <Route path="/login" element={ <Login /> } />
         <Route path="/wallet" element={ <Wallet /> } />
         <Route path="/register" element={ <Register /> } />
       </Routes>
