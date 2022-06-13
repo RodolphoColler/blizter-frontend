@@ -92,7 +92,7 @@
   color: #f1f0f3;
 }
 
-.form-error {
+.register-page .form-error {
   position: absolute;
   top: 330px;
   color: #e55959;
