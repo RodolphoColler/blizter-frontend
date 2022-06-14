@@ -1,0 +1,29 @@
+.wallet-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wallet-page > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  display: flex;
+  flex: 3;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100vh;
+  margin: 10px;
+}
+
+h1 {
+  font-size: 90px;
+  color: #4685c1;
+}
