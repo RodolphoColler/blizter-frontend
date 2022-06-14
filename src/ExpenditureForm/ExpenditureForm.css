@@ -26,6 +26,15 @@
   text-align: left;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .expenditure-form input {
   all: unset;
   width: 260px;
@@ -50,11 +59,19 @@
   color: rgba(213, 212, 212, 0.787);
 }
 
+.expenditure-form .form-error {
+  position: absolute;
+  top: 315px;
+  color: #e55959;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
 .expenditure-form button {
   all: unset;
   height: 40px;
   width: 230px;
-  margin-top: 15px;
+  margin-top: 20px;
   background-color: #4685c1;
   border-radius: 10px;
   transition: 0.5s;
