@@ -1,29 +1,40 @@
-import axios from 'axios';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { expenditure, getCategories, getUserId } from '../services/request';
 import './ExpenditureForm.css';
-
-async function getCategories() {
-  const { data: { categories } } = await axios.get('/category');
-
-  console.log(categories);
-
-  return categories;
-}
 
 function ExpenditureForm({ setIsFormVisible }) {
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState('');
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
+  const [category, setCategory] = useState('Education');
   const [date, setDate] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
   }, []);
 
-  function handleSubmit(event) {
+  function validateForm() {
+    if (!description) throw new Error('Description cannot be empty.');
+    if (!value) throw new Error('Value cannot be empty.');
+    if (value === '0') throw new Error('Value cannot be zero.');
+    if (!date) throw new Error('Date cannot be empty.');
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
+
+    try {
+      validateForm();
+      const userId = await getUserId();
+      const formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+      await expenditure({ description, value: Number(value), date: formattedDate, category, userId });
+      setIsFormVisible((prev) => !prev);
+    } catch (error) {
+      setFormError(error.message);
+    }
   }
 
   return (
@@ -42,7 +53,7 @@ function ExpenditureForm({ setIsFormVisible }) {
         <label htmlFor="value">
           Value
           <input
-            type="text"
+            type="number"
             id="value"
             placeholder="Insert the value"
             value={ value }
@@ -71,9 +82,9 @@ function ExpenditureForm({ setIsFormVisible }) {
             onChange={ (e) => setDate(e.target.value) }
           />
         </label>
+        { formError && <p className="form-error">{ formError }</p>}
         <button
           type="submit"
-          onClick={ () => { setIsFormVisible((prev) => !prev); } }
         >
           Create Expense
         </button>
