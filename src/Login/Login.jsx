@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import login from '../services/axiosPost';
+import { login } from '../services/request';
 import './Login.css';
 
 function Login() {
@@ -23,8 +23,7 @@ function Login() {
 
     try {
       validateForm();
-      const endpoint = '/login';
-      const { token } = await login(endpoint, { email, password });
+      const { token } = await login({ email, password });
       localStorage.setItem('token', token);
       navigate('/wallet');
     } catch (error) {
