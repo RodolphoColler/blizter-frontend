@@ -25,9 +25,10 @@ function Wallet() {
         }
         <button
           type="button"
+          className="create-expend-button"
           onClick={ () => { setIsFormVisible(!isFormVisible); } }
         >
-          create expend
+          Create Expend
         </button>
       </aside>
       <div>

@@ -15,6 +15,22 @@
   flex: 3;
 }
 
+.create-expend-button {
+  color: #f1f0f0;
+  height: 40px;
+  width: 100%;
+  margin-top: 20px;
+  background-color: #4685c1;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.create-expend-button:hover {
+  cursor: pointer;
+  background-color: #337bbe;
+  transition: 0.5s;
+}
+
 aside {
   display: flex;
   flex-direction: column;
