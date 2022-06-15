@@ -13,16 +13,16 @@ function Wallet() {
 
   return (
     <main className="wallet-page">
+      {
+        isFormVisible && (
+          <ExpenditureForm
+            setIsFormVisible={ setIsFormVisible }
+            userCategories={ userCategories }
+            setUserCategories={ setUserCategories }
+          />
+        )
+      }
       <aside>
-        {
-          isFormVisible && (
-            <ExpenditureForm
-              setIsFormVisible={ setIsFormVisible }
-              userCategories={ userCategories }
-              setUserCategories={ setUserCategories }
-            />
-          )
-        }
         <button
           type="button"
           className="create-expend-button"
