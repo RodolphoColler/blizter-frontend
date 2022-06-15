@@ -1,10 +1,10 @@
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { expenditure, getCategories, getUserId } from '../services/request';
+import { createExpenditure, getCategories, getUserId, updateUserCategories } from '../services/request';
 import './ExpenditureForm.css';
 
-function ExpenditureForm({ setIsFormVisible }) {
+function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }) {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
@@ -23,6 +23,16 @@ function ExpenditureForm({ setIsFormVisible }) {
     if (!date) throw new Error('Date cannot be empty.');
   }
 
+  async function updateUser() {
+    const isUserCategoryExistent = userCategories.find(({ name }) => name === category);
+
+    if (!isUserCategoryExistent) {
+      const newCategoryId = categories[categories.findIndex(({ name }) => name === category)].id;
+      const newCategories = await updateUserCategories(userId, { categoryId: newCategoryId });
+      setUserCategories(newCategories);
+    }
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -30,8 +40,9 @@ function ExpenditureForm({ setIsFormVisible }) {
       validateForm();
       const userId = await getUserId();
       const formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      await expenditure({ description, value: Number(value), date: formattedDate, category, userId });
-      setIsFormVisible((prev) => !prev);
+      await updateUser();
+      await createExpenditure({ description, value: Number(value), date: formattedDate, category, userId });
+      setIsFormVisible(false);
     } catch (error) {
       setFormError(error.message);
     }
@@ -95,6 +106,8 @@ function ExpenditureForm({ setIsFormVisible }) {
 
 ExpenditureForm.propTypes = {
   setIsFormVisible: PropTypes.func.isRequired,
+  setUserCategories: PropTypes.func.isRequired,
+  userCategories: PropTypes.arrayOf.isRequired,
 };
 
 export default ExpenditureForm;

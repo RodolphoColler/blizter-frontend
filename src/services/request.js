@@ -23,7 +23,7 @@ export async function register(body) {
   }
 }
 
-export async function expenditure(body) {
+export async function createExpenditure(body) {
   try {
     const { data } = await axios.post('/expenditure', body);
 
@@ -33,8 +33,8 @@ export async function expenditure(body) {
   }
 }
 
-export async function getCategories() {
-  const { data: { categories } } = await axios.get('/category');
+export async function updateUserCategories(id, body) {
+  const { data: { categories } } = await axios.patch(`user/category/${id}`, body);
 
   return categories;
 }
@@ -43,4 +43,17 @@ export async function getUserId() {
   const { data: { id } } = await axios.get('/token');
 
   return id;
+}
+
+export async function getUserCategories() {
+  const userId = await getUserId();
+  const { data: { categories } } = await axios.get(`/user/category/${userId}`);
+
+  return categories;
+}
+
+export async function getCategories() {
+  const { data: { categories } } = await axios.get('/category');
+
+  return categories;
 }
