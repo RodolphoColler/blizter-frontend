@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ExpenditureForm from '../ExpenditureForm/ExpenditureForm';
 import { getUserCategories } from '../services/request';
+import Expenditures from '../Expenditures';
 import './Wallet.css';
 
 function Wallet() {
@@ -12,7 +13,7 @@ function Wallet() {
   }, []);
 
   return (
-    <main className="wallet-page">
+    <>
       {
         isFormVisible && (
           <ExpenditureForm
@@ -22,19 +23,22 @@ function Wallet() {
           />
         )
       }
-      <aside>
-        <button
-          type="button"
-          className="create-expend-button"
-          onClick={ () => { setIsFormVisible(!isFormVisible); } }
-        >
-          Create Expend
-        </button>
-      </aside>
-      <div>
-        <h1>In building</h1>
-      </div>
-    </main>
+      <main className="wallet-page">
+        <aside>
+          <button
+            type="button"
+            className="create-expend-button"
+            onClick={ () => { setIsFormVisible(!isFormVisible); } }
+          >
+            Create Expend
+          </button>
+          <Expenditures userCategories={ userCategories } isFormVisible={ isFormVisible } />
+        </aside>
+        <div>
+          <h1>In building</h1>
+        </div>
+      </main>
+    </>
   );
 }
 
