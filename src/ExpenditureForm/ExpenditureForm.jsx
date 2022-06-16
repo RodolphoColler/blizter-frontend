@@ -107,7 +107,7 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
 ExpenditureForm.propTypes = {
   setIsFormVisible: PropTypes.func.isRequired,
   setUserCategories: PropTypes.func.isRequired,
-  userCategories: PropTypes.arrayOf.isRequired,
+  userCategories: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default ExpenditureForm;
