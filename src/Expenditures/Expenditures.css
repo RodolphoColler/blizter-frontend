@@ -1,0 +1,9 @@
+* {
+  margin: 0;
+}
+
+.expend-categories-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
