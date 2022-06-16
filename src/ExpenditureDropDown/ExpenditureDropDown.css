@@ -1,0 +1,80 @@
+
+.expend-categories {
+  all: unset;
+  width: 320px;
+  background-color: #232430;
+  height: 40px;
+  text-align: center;
+  color: #f1f0f0;
+  margin-top: 15px;
+  border-radius: 10px;
+  transition: 0.2s ease-in;
+}
+
+.expend-categories:hover {
+  background-color: #1f2029;
+  transition: 0.2s ease-in;
+}
+
+ul {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 320px;
+}
+
+ul > div {
+  display: flex;
+}
+
+.expend-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1f2029;
+  width: 300px;
+  height: 20px;
+  padding: 5px 0px 5px 10px;
+  font-size: 13px;
+  margin-top: 5px;
+  color: #e6e4e4d3;
+  border-radius: 10px;
+}
+
+.expend-item div {
+  margin-right: 18px;
+  width: 20px;
+  position: relative;
+}
+
+.expend-item button {
+  all: unset;
+  opacity: 0;
+  height: 15px;
+  transition: 0.1s ease-in;
+  margin-left: 15px;
+}
+
+.expend-item:hover button {
+  color: rgba(255, 0, 0, 0.824);
+  transition: 0.3s ease-in;
+  cursor: pointer;
+  opacity: 1;
+}
+
+.expend-item p {
+  color: #e6e4e4d3;
+  position: absolute;
+  transition: 0.3s ease-in;
+}
+
+.expend-item:hover p {
+  transition: 0.2s ease-in;
+  transform: translateX(-25px);
+}
+
+.expend-item:hover hr {
+  color: red;
+}
