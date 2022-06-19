@@ -43,9 +43,8 @@ ul > div {
   border-radius: 10px;
 }
 
-.expend-item div {
-  margin-right: 18px;
-  width: 20px;
+.expend-item span {
+  margin-right: 10px;
   position: relative;
 }
 
@@ -54,7 +53,6 @@ ul > div {
   opacity: 0;
   height: 15px;
   transition: 0.1s ease-in;
-  margin-left: 15px;
 }
 
 .expend-item:hover button {
@@ -67,12 +65,13 @@ ul > div {
 .expend-item p {
   color: #e6e4e4d3;
   position: absolute;
+  right: 0px;
   transition: 0.3s ease-in;
 }
 
 .expend-item:hover p {
   transition: 0.2s ease-in;
-  transform: translateX(-25px);
+  transform: translateX(-23px);
 }
 
 .expend-item:hover hr {
