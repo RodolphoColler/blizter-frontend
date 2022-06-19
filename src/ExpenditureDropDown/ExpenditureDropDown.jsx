@@ -1,22 +1,8 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
-import moment from 'moment';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { getUserId } from '../services/request';
+import { deleteExpend, getExpenditure } from '../services/request';
 import './ExpenditureDropDown.css';
-
-async function getExpenditure(category) {
-  const userId = await getUserId();
-
-  const date = moment().format('YYYY-MM-') + moment().daysInMonth();
-
-  const url = `/expenditure/${userId}?date=${date}&category=${category}`;
-
-  const { data: { expenditures } } = await axios.get(url);
-
-  return expenditures;
-}
 
 function ExpenditureDropDown({ name, isFormVisible }) {
   const [open, setOpen] = useState(false);
@@ -26,10 +12,10 @@ function ExpenditureDropDown({ name, isFormVisible }) {
     if (!isFormVisible) getExpenditure(name).then((data) => { setExpenditures(data); });
   }, [name, isFormVisible]);
 
-  async function deleteExpend({ currentTarget }) {
-    const { data: { expenditure } } = await axios.delete(`/expenditure/${currentTarget.id}`);
+  async function removeExpend({ currentTarget }) {
+    const deletedExpend = await deleteExpend(currentTarget.id);
 
-    const newExpenditures = expenditures.filter(({ id }) => id !== expenditure.id);
+    const newExpenditures = expenditures.filter(({ id }) => id !== deletedExpend.id);
 
     setExpenditures(newExpenditures);
   }
@@ -47,12 +33,12 @@ function ExpenditureDropDown({ name, isFormVisible }) {
               expenditures.map(({ description, value, id }) => (
                 <li className="expend-item" key={ id }>
                   { description }
-                  <div>
+                  <span>
                     <p>{`$${value}`}</p>
-                    <button type="button" onClick={ deleteExpend } id={ id }>
+                    <button type="button" onClick={ removeExpend } id={ id }>
                       <FiTrash2 width="15px" />
                     </button>
-                  </div>
+                  </span>
                 </li>
               ))
             }

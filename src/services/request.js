@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 
 axios.defaults.baseURL = 'http://localhost:3001';
 axios.defaults.headers.common.Authorization = localStorage.getItem('token');
@@ -56,4 +57,22 @@ export async function getCategories() {
   const { data: { categories } } = await axios.get('/category');
 
   return categories;
+}
+
+export async function getExpenditure(category) {
+  const userId = await getUserId();
+
+  const date = moment().format('YYYY-MM-') + moment().daysInMonth();
+
+  const url = `/expenditure/${userId}?date=${date}&category=${category}`;
+
+  const { data: { expenditures } } = await axios.get(url);
+
+  return expenditures;
+}
+
+export async function deleteExpend(id) {
+  const { data: { expenditure } } = await axios.delete(`/expenditure/${id}`);
+
+  return expenditure;
 }
