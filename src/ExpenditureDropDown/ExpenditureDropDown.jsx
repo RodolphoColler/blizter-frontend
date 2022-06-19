@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp */
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
 import moment from 'moment';
@@ -27,8 +26,12 @@ function ExpenditureDropDown({ name, isFormVisible }) {
     if (!isFormVisible) getExpenditure(name).then((data) => { setExpenditures(data); });
   }, [name, isFormVisible]);
 
-  async function deleteExpend(event) {
-    console.log(event.currentTarget);
+  async function deleteExpend({ currentTarget }) {
+    const { data: { expenditure } } = await axios.delete(`/expenditure/${currentTarget.id}`);
+
+    const newExpenditures = expenditures.filter(({ id }) => id !== expenditure.id);
+
+    setExpenditures(newExpenditures);
   }
 
   return (
@@ -46,7 +49,7 @@ function ExpenditureDropDown({ name, isFormVisible }) {
                   { description }
                   <div>
                     <p>{`$${value}`}</p>
-                    <button type="button" onClick={ deleteExpend }>
+                    <button type="button" onClick={ deleteExpend } id={ id }>
                       <FiTrash2 width="15px" />
                     </button>
                   </div>
