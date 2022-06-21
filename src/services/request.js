@@ -71,7 +71,7 @@ export async function getExpenditures(category, date) {
   return expenditures;
 }
 
-export async function deleteExpend(id) {
+export async function deleteExpenditure(id) {
   const { data: { expenditure } } = await axios.delete(`/expenditure/${id}`);
 
   return expenditure;

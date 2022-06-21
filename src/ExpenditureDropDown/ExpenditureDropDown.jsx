@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
 import { useState, useEffect, useContext } from 'react';
-import { deleteExpend, getExpenditures } from '../services/request';
+import { deleteExpenditure, getExpenditures } from '../services/request';
 import './ExpenditureDropDown.css';
 import BlizterContext from '../context/BlizterContext';
 
@@ -14,10 +14,10 @@ function ExpenditureDropDown({ name, isFormVisible }) {
     if (!isFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
   }, [name, isFormVisible, date]);
 
-  async function removeExpend({ currentTarget }) {
-    const deletedExpend = await deleteExpend(currentTarget.id);
+  async function removeExpenditure({ currentTarget }) {
+    const deletedExpenditure = await deleteExpenditure(currentTarget.id);
 
-    const newExpenditures = expenditures.filter(({ id }) => id !== deletedExpend.id);
+    const newExpenditures = expenditures.filter(({ id }) => id !== deletedExpenditure.id);
 
     setExpenditures(newExpenditures);
   }
@@ -37,7 +37,7 @@ function ExpenditureDropDown({ name, isFormVisible }) {
                   { description }
                   <span>
                     <p>{`$${value}`}</p>
-                    <button type="button" onClick={ removeExpend } id={ id }>
+                    <button type="button" onClick={ removeExpenditure } id={ id }>
                       <FiTrash2 width="15px" />
                     </button>
                   </span>
