@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
-import { useState, useEffect } from 'react';
-import { deleteExpend, getExpenditure } from '../services/request';
+import { useState, useEffect, useContext } from 'react';
+import { deleteExpend, getExpenditures } from '../services/request';
 import './ExpenditureDropDown.css';
+import BlizterContext from '../context/BlizterContext';
 
 function ExpenditureDropDown({ name, isFormVisible }) {
   const [open, setOpen] = useState(false);
   const [expenditures, setExpenditures] = useState([]);
+  const { date } = useContext(BlizterContext);
 
   useEffect(() => {
-    if (!isFormVisible) getExpenditure(name).then((data) => { setExpenditures(data); });
-  }, [name, isFormVisible]);
+    if (!isFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
+  }, [name, isFormVisible, date]);
 
   async function removeExpend({ currentTarget }) {
     const deletedExpend = await deleteExpend(currentTarget.id);
