@@ -1,0 +1,28 @@
+.date-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.date-container h2 {
+  color: #337bbe;
+}
+
+.date-container button {
+  all: unset;
+  color: #337bbe;
+  font-size: 25px;
+  margin-top: 5px;
+  padding: 0px 5px;
+}
+
+.date-container button:nth-child(1) {
+  transform: rotate(180deg);
+  margin-bottom: 5px;
+  margin-top: 0px;
+}
+
+.date-container button:hover {
+  cursor: pointer;
+}
