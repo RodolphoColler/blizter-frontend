@@ -23,7 +23,7 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
     if (!date) throw new Error('Date cannot be empty.');
   }
 
-  async function updateUser() {
+  async function updateUser(userId) {
     const isUserCategoryExistent = userCategories.find(({ name }) => name === category);
 
     if (!isUserCategoryExistent) {
@@ -40,7 +40,7 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
       validateForm();
       const userId = await getUserId();
       const formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      await updateUser();
+      await updateUser(userId);
       await createExpenditure({ description, value: Number(value), date: formattedDate, category, userId });
       setIsFormVisible(false);
     } catch (error) {
