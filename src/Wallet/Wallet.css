@@ -1,18 +1,14 @@
 .wallet-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 100vh;
 }
 
-.wallet-page > div {
+.wallet-page-content {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  display: flex;
-  flex: 3;
+  height: calc(100% - 65px);
+  width: 1300px;
+  margin-left: 105px;
 }
 
 .create-expend-button {
@@ -20,14 +16,14 @@
   height: 40px;
   width: 100%;
   margin-top: 20px;
-  background-color: #4685c1;
+  background-color: #2e7ec8;
   border-radius: 10px;
   transition: 0.5s;
 }
 
 .create-expend-button:hover {
   cursor: pointer;
-  background-color: #337bbe;
+  background-color: #277ac7;
   transition: 0.5s;
 }
 
@@ -35,11 +31,28 @@ aside {
   display: flex;
   flex-direction: column;
   flex: 1;
-  height: 100vh;
+  height: calc(100% - 65px);
   margin: 20px;
 }
 
-h1 {
-  font-size: 90px;
-  color: #4685c1;
+.wallet-page-content div {
+  flex: 4;
+}
+
+.charts-container {
+  margin-left: 30px;
+  width: 500px;
+}
+
+.doughnuts-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
 }
