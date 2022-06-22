@@ -1,8 +1,7 @@
 .date-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
+  justify-content: flex-end;
 }
 
 .date-container h2 {
