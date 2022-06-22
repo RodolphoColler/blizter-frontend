@@ -1,0 +1,56 @@
+.wallet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 65px;
+}
+
+.wallet-header p {
+  color: white;
+}
+
+.wallet-header ul {
+  display: flex;
+  justify-content: space-around;
+  width: 150px;
+}
+
+.wallet-header a {
+  text-decoration: none;
+}
+
+.wallet-header li {
+  all: unset;
+  font-size: 15px;
+  color: rgb(231, 225, 225);
+  padding: 5px;
+  transition: 0.2s;
+  border-radius: 5px;
+}
+
+.wallet-header li:hover {
+  cursor: pointer;
+  background-color: #337bbe;
+  transition: 0.2s;
+}
+
+.blizter-logo {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 9%;
+  margin-right: 300px;
+  color: #337bbe;
+}
+
+.blizter-logo p {
+  color: rgba(51,123,190);
+  font-weight: 800;
+  font-size: 27px;
+}
+
+.blizter-logo :hover {
+  cursor: pointer;
+}
