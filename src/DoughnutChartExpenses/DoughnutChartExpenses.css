@@ -1,21 +1,20 @@
-.doughnut-container {
+.doughnut-expenses-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
+  position: relative;
   background-color: #2e2f3d;
   border-radius: 10px;
-  position: relative;
 }
 
-.doughnut-container p {
+.doughnut-expenses-container p {
   position: absolute;
   color: white;
 }
 
-.doughnut-container p:nth-child(1) {
+.doughnut-expenses-container p:nth-child(1) {
   letter-spacing: 1px;
-  background-image: linear-gradient(40deg, rgba(51,123,190,0.9839286056219363) 3%, rgba(51,190,160,1) 100%);
+  background-image: linear-gradient(40deg, rgba(51,123,190,0.98) 3%, rgba(51,190,160,1) 100%);
   position: absolute;
   top: 15px;
   font-weight: 800;
@@ -23,15 +22,15 @@
   -webkit-background-clip: text;
 }
 
-.doughnut-container p:nth-child(3) {
-  color: rgba(51,123,190,0.9839286056219363);
+.doughnut-expenses-container p:nth-child(3) {
+  color: rgba(51,123,190,0.98);
   font-size: 30px;
   font-weight: 800;
   position: absolute;
   bottom: 60px;
 }
 
-.doughnut-container p:nth-child(4) {
+.doughnut-expenses-container p:nth-child(4) {
   position: absolute;
   bottom: 10px;
   background-image: linear-gradient(40deg, rgba(51,123,190,0.9839286056219363) 3%, rgba(51,190,160,1) 86%);
