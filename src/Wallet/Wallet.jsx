@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ExpenditureForm from '../ExpenditureForm/ExpenditureForm';
 import { getUserCategories } from '../services/request';
 import Expenditures from '../Expenditures';
@@ -10,13 +10,16 @@ import BarChart from '../BarChart';
 import DoughnutChartSalary from '../DoughnutChartSalary';
 import DoughnutChartExpenses from '../DoughnutChartExpenses';
 import ShowSalary from '../ShowSalary/ShowSalary';
+import BlizterContext from '../context/BlizterContext';
 
 function Wallet() {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
   const [userCategories, setUserCategories] = useState([]);
+  const { setIsUserLoggedIn } = useContext(BlizterContext);
 
   useEffect(() => {
+    setIsUserLoggedIn(true);
     getUserCategories().then((data) => setUserCategories(data));
   }, []);
 

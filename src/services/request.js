@@ -8,7 +8,9 @@ const userDateFormat = 'DD MMMM YYYY';
 
 export async function login(body) {
   try {
-    const { data } = await axios.post('/login', body);
+    const headers = { Authorization: localStorage.getItem('token') };
+
+    const { data } = await axios.post('/login', body, { headers });
 
     return data;
   } catch (error) {
@@ -16,7 +18,7 @@ export async function login(body) {
   }
 }
 
-export async function register(body) {
+export async function createUser(body) {
   try {
     const { data } = await axios.post('/user', body);
 

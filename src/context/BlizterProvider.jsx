@@ -8,19 +8,22 @@ function BlizterProvider({ children }) {
   const [date, setDate] = useState(moment().format('DD MMMM YYYY'));
   const [dateCount, setDateCount] = useState(0);
   const [salary, setSalary] = useState(1);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
   useEffect(() => {
     setDate(moment().subtract(dateCount, 'month').format('DD MMMM YYYY'));
   }, [dateCount]);
 
   useEffect(() => {
+    if (!isUserLoggedIn) return;
+
     getSalary(date)
       .then((data) => setSalary(data.value))
       .catch(() => setSalary(0));
-  }, [date]);
+  }, [date, isUserLoggedIn]);
 
   return (
-    <BlizterContext.Provider value={ { date, setDateCount, salary, setSalary } }>
+    <BlizterContext.Provider value={ { date, setDateCount, salary, setSalary, setIsUserLoggedIn } }>
       {children}
     </BlizterContext.Provider>
   );

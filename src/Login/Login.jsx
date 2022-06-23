@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BlizterContext from '../context/BlizterContext';
+import { validateLogin } from '../services/formValidations';
 import { login } from '../services/request';
 import './Login.css';
 
@@ -7,24 +10,23 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formError, setFormError] = useState('');
+  const { setIsUserLoggedIn } = useContext(BlizterContext);
   const navigate = useNavigate();
-
-  function validateForm() {
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const minPasswordLength = 7;
-
-    if (!emailRegex.test(email)) throw new Error('Email is not valid.');
-    if (!password) throw new Error('Password is required');
-    if (password.length < minPasswordLength) throw new Error('Password need to have at least 7 characters.');
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      validateForm();
+      validateLogin(email, password);
+
       const { token } = await login({ email, password });
+
       localStorage.setItem('token', token);
+
+      axios.defaults.headers.common.Authorization = localStorage.getItem('token');
+
+      setIsUserLoggedIn(true);
+
       navigate('/wallet');
     } catch (error) {
       setFormError(error.message);
