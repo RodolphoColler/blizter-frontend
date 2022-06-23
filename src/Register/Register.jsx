@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../services/request';
+import { validateRegister } from '../services/formValidations';
+import { createUser } from '../services/request';
 import './Register.css';
 
 function Register() {
@@ -11,24 +12,20 @@ function Register() {
   const [formError, setFormError] = useState('');
   const navigate = useNavigate();
 
-  function validateForm() {
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    const minPasswordLength = 7;
-
-    if (!emailRegex.test(email)) throw new Error('Email is not valid.');
-    if (!name) throw new Error('Name is required.');
-    if (!password) throw new Error('Password is required');
-    if (password.length < minPasswordLength) throw new Error('Password need to have at least 7 characters.');
-    if (password !== confirmPassword) throw new Error('Passwords does not match.');
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
-      validateForm();
-      const { token } = await register({ email, name, password });
+      validateRegister(email, name, password, confirmPassword);
+
+      const { token } = await createUser({ email, name, password });
+
       localStorage.setItem('token', token);
+
+      axios.defaults.headers.common.Authorization = localStorage.getItem('token');
+
+      setIsUserLoggedIn(true);
+
       navigate('/wallet');
     } catch (error) {
       setFormError(error.message);
