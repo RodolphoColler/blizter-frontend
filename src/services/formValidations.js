@@ -11,7 +11,6 @@ export function validateRegister(email, name, password, confirmPassword) {
   validateCredentials(email, password);
 
   if (!name) throw new Error('Name is required.');
-  if (password.length < minPasswordLength) throw new Error('Password need to have at least 7 characters.');
   if (password !== confirmPassword) throw new Error('Passwords does not match.');
 }
 

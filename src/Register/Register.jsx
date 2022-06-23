@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BlizterContext from '../context/BlizterContext';
 import { validateRegister } from '../services/formValidations';
 import { createUser } from '../services/request';
 import './Register.css';
@@ -10,6 +12,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [formError, setFormError] = useState('');
+  const { setIsUserLoggedIn } = useContext(BlizterContext);
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
