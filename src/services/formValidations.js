@@ -17,3 +17,10 @@ export function validateRegister(email, name, password, confirmPassword) {
 export function validateLogin(email, password) {
   validateCredentials(email, password);
 }
+
+export function validateExpenditure(description, value, date) {
+  if (!description) throw new Error('Description cannot be empty.');
+  if (!value) throw new Error('Value cannot be empty.');
+  if (value === '0') throw new Error('Value cannot be zero.');
+  if (!date) throw new Error('Date cannot be empty.');
+}

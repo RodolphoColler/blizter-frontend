@@ -1,7 +1,7 @@
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { createExpenditure, getCategories, getUserId, updateUserCategories } from '../services/request';
+import { validateExpenditure } from '../services/formValidations';
+import { createExpenditure, getCategories, updateUserCategories } from '../services/request';
 import './ExpenditureForm.css';
 
 function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }) {
@@ -16,19 +16,12 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
     getCategories().then((data) => setCategories(data));
   }, []);
 
-  function validateForm() {
-    if (!description) throw new Error('Description cannot be empty.');
-    if (!value) throw new Error('Value cannot be empty.');
-    if (value === '0') throw new Error('Value cannot be zero.');
-    if (!date) throw new Error('Date cannot be empty.');
-  }
-
-  async function updateUser(userId) {
+  async function updateUser() {
     const isUserCategoryExistent = userCategories.find(({ name }) => name === category);
 
     if (!isUserCategoryExistent) {
       const newCategoryId = categories[categories.findIndex(({ name }) => name === category)].id;
-      const newCategories = await updateUserCategories(userId, { categoryId: newCategoryId });
+      const newCategories = await updateUserCategories({ categoryId: newCategoryId });
       setUserCategories(newCategories);
     }
   }
@@ -37,11 +30,12 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
     event.preventDefault();
 
     try {
-      validateForm();
-      const userId = await getUserId();
-      const formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DD');
-      await updateUser(userId);
-      await createExpenditure({ description, value: Number(value), date: formattedDate, category, userId });
+      validateExpenditure(description, value, date);
+
+      await updateUser();
+
+      await createExpenditure({ description, value: Number(value), date, category });
+
       setIsFormVisible(false);
     } catch (error) {
       setFormError(error.message);

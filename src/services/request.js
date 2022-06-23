@@ -28,9 +28,19 @@ export async function createUser(body) {
   }
 }
 
+export async function getUserId() {
+  const { data: { id } } = await axios.get('/token');
+
+  return id;
+}
+
 export async function createExpenditure(body) {
   try {
-    const { data } = await axios.post('/expenditure', body);
+    const userId = await getUserId();
+
+    const formattedDate = moment(body.date, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
+    const { data } = await axios.post('/expenditure', { ...body, userId, date: formattedDate });
 
     return data;
   } catch (error) {
@@ -38,16 +48,12 @@ export async function createExpenditure(body) {
   }
 }
 
-export async function updateUserCategories(id, body) {
-  const { data: { categories } } = await axios.patch(`user/category/${id}`, body);
+export async function updateUserCategories(body) {
+  const userId = await getUserId();
+
+  const { data: { categories } } = await axios.patch(`user/category/${userId}`, body);
 
   return categories;
-}
-
-export async function getUserId() {
-  const { data: { id } } = await axios.get('/token');
-
-  return id;
 }
 
 export async function getUserCategories() {
