@@ -4,7 +4,7 @@ import { validateExpenditure } from '../services/formValidations';
 import { createExpenditure, getCategories, updateUserCategories } from '../services/request';
 import './ExpenditureForm.css';
 
-function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }) {
+function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFormVisible }) {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
@@ -36,7 +36,7 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
 
       await createExpenditure({ description, value: Number(value), date, category });
 
-      setIsFormVisible(false);
+      setIsExpenditureFormVisible(false);
     } catch (error) {
       setFormError(error.message);
     }
@@ -99,9 +99,9 @@ function ExpenditureForm({ setIsFormVisible, userCategories, setUserCategories }
 }
 
 ExpenditureForm.propTypes = {
-  setIsFormVisible: PropTypes.func.isRequired,
   setUserCategories: PropTypes.func.isRequired,
   userCategories: PropTypes.arrayOf(Object).isRequired,
+  setIsExpenditureFormVisible: PropTypes.func.isRequired,
 };
 
 export default ExpenditureForm;

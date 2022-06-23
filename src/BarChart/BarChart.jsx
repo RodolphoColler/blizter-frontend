@@ -9,7 +9,7 @@ import './BarChart.css';
 function BarChart() {
   const [categories, setCategories] = useState([]);
   const [categoriesExpense, setCategoriesExpense] = useState([]);
-  const { salary, date } = useContext(BlizterContext);
+  const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
 
   async function getCategoriesExpenses() {
     const categoriesExpenditurePromises = categories.map(async ({ name }) => getMonthExpenditureByCategory(name, date));
@@ -20,8 +20,8 @@ function BarChart() {
   }
 
   useEffect(() => {
-    getUserCategories().then((data) => setCategories(data));
-  }, []);
+    if (!isExpenditureFormVisible) getUserCategories().then((data) => setCategories(data));
+  }, [isExpenditureFormVisible]);
 
   useEffect(() => {
     if (categories.length) getCategoriesExpenses().then((data) => setCategoriesExpense(data));

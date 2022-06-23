@@ -9,21 +9,33 @@ function BlizterProvider({ children }) {
   const [dateCount, setDateCount] = useState(0);
   const [salary, setSalary] = useState(1);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isExpenditureFormVisible, setIsExpenditureFormVisible] = useState(false);
 
   useEffect(() => {
     setDate(moment().subtract(dateCount, 'month').format('DD MMMM YYYY'));
   }, [dateCount]);
 
   useEffect(() => {
-    if (!isUserLoggedIn) return;
+    if (!isUserLoggedIn && isExpenditureFormVisible) return;
 
     getSalary(date)
       .then((data) => setSalary(data.value))
       .catch(() => setSalary(0));
-  }, [date, isUserLoggedIn]);
+  }, [date, isUserLoggedIn, isExpenditureFormVisible]);
 
   return (
-    <BlizterContext.Provider value={ { date, setDateCount, salary, setSalary, setIsUserLoggedIn } }>
+    <BlizterContext.Provider
+      value={ {
+        date,
+        setDate,
+        setDateCount,
+        salary,
+        setSalary,
+        setIsUserLoggedIn,
+        isExpenditureFormVisible,
+        setIsExpenditureFormVisible,
+      } }
+    >
       {children}
     </BlizterContext.Provider>
   );

@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import ExpenditureDropDown from '../ExpenditureDropDown';
 import './Expenditures.css';
 
-function Expenditures({ userCategories, isFormVisible }) {
+function Expenditures({ userCategories }) {
   return (
     <div className="expend-categories-container">
       {
         userCategories.map(({ name, id }) => (
-          <ExpenditureDropDown name={ name } key={ id } isFormVisible={ isFormVisible } />
+          <ExpenditureDropDown name={ name } key={ id } />
         ))
       }
     </div>
@@ -16,7 +16,6 @@ function Expenditures({ userCategories, isFormVisible }) {
 
 Expenditures.propTypes = {
   userCategories: PropTypes.arrayOf(Object).isRequired,
-  isFormVisible: PropTypes.bool.isRequired,
 };
 
 export default Expenditures;

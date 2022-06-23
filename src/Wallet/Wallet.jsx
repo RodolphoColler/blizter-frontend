@@ -13,10 +13,9 @@ import ShowSalary from '../ShowSalary/ShowSalary';
 import BlizterContext from '../context/BlizterContext';
 
 function Wallet() {
-  const [isFormVisible, setIsFormVisible] = useState(false);
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
   const [userCategories, setUserCategories] = useState([]);
-  const { setIsUserLoggedIn } = useContext(BlizterContext);
+  const { setIsUserLoggedIn, setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
     setIsUserLoggedIn(true);
@@ -35,9 +34,9 @@ function Wallet() {
         <div className="wallet-page-content">
           <aside>
             {
-              isFormVisible && (
+              isExpenditureFormVisible && (
                 <ExpenditureForm
-                  setIsFormVisible={ setIsFormVisible }
+                  setIsExpenditureFormVisible={ setIsExpenditureFormVisible }
                   userCategories={ userCategories }
                   setUserCategories={ setUserCategories }
                 />
@@ -46,11 +45,11 @@ function Wallet() {
             <button
               type="button"
               className="create-expend-button"
-              onClick={ () => { setIsFormVisible(!isFormVisible); } }
+              onClick={ () => { setIsExpenditureFormVisible(true); } }
             >
               Create Expend
             </button>
-            <Expenditures userCategories={ userCategories } isFormVisible={ isFormVisible } />
+            <Expenditures userCategories={ userCategories } />
           </aside>
           <div className="charts-container">
             <div className="chart-header">

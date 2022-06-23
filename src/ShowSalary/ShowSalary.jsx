@@ -5,15 +5,17 @@ import { getMonthExpenditures } from '../services/request';
 import './ShowSalary.css';
 
 function ShowSalary({ setIsSalaryFormVisible }) {
-  const [monthExpense, setMonthExpense] = useState(0);
-  const { salary, date } = useContext(BlizterContext);
+  const [monthExpenditures, setMonthExpenditures] = useState(0);
+  const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
 
-  useEffect(() => { getMonthExpenditures(date).then((value) => setMonthExpense(value)); }, [date]);
+  useEffect(() => {
+    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((value) => setMonthExpenditures(value));
+  }, [date, isExpenditureFormVisible]);
 
   useEffect(() => { if (!salary) setIsSalaryFormVisible(true); }, [salary]);
 
   return (
-    <h2 className="salary">{`Balance $${salary - monthExpense}`}</h2>
+    <h2 className="salary">{`Balance $${salary - monthExpenditures}`}</h2>
   );
 }
 

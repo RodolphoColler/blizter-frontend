@@ -5,14 +5,14 @@ import { deleteExpenditure, getExpenditures } from '../services/request';
 import './ExpenditureDropDown.css';
 import BlizterContext from '../context/BlizterContext';
 
-function ExpenditureDropDown({ name, isFormVisible }) {
+function ExpenditureDropDown({ name }) {
   const [open, setOpen] = useState(false);
   const [expenditures, setExpenditures] = useState([]);
-  const { date } = useContext(BlizterContext);
+  const { date, isExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
-    if (!isFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
-  }, [name, isFormVisible, date]);
+    if (!isExpenditureFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
+  }, [name, isExpenditureFormVisible, date]);
 
   async function removeExpenditure({ currentTarget }) {
     const deletedExpenditure = await deleteExpenditure(currentTarget.id);
@@ -53,7 +53,6 @@ function ExpenditureDropDown({ name, isFormVisible }) {
 
 ExpenditureDropDown.propTypes = {
   name: PropTypes.string.isRequired,
-  isFormVisible: PropTypes.bool.isRequired,
 };
 
 export default ExpenditureDropDown;

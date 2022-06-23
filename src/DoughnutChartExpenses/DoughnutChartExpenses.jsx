@@ -20,16 +20,16 @@ const options = {
 function DoughnutChartExpenses() {
   const [expenses, setExpenses] = useState(0);
   const [lastMonthExpenses, setLastMonthExpenses] = useState(0);
-  const { date } = useContext(BlizterContext);
+  const { date, isExpenditureFormVisible } = useContext(BlizterContext);
 
   const monthComparisonPercentage = (lastMonthExpenses - expenses) < 0
     ? Math.abs(((lastMonthExpenses * 100) / expenses).toFixed(0) - 100)
     : (Math.abs(((expenses * 100) / lastMonthExpenses) - 100)).toFixed(0);
 
   useEffect(() => {
-    getMonthExpenditures(date).then((value) => setExpenses(value));
+    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((value) => setExpenses(value));
     getLastMonthExpenditures(date).then((value) => setLastMonthExpenses(value));
-  }, [date]);
+  }, [date, isExpenditureFormVisible]);
 
   const doughnutData = {
     datasets: [
