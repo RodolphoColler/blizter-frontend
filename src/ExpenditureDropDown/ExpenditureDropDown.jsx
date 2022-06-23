@@ -8,7 +8,13 @@ import BlizterContext from '../context/BlizterContext';
 function ExpenditureDropDown({ name }) {
   const [open, setOpen] = useState(false);
   const [expenditures, setExpenditures] = useState([]);
-  const { date, isExpenditureFormVisible } = useContext(BlizterContext);
+  const { date, isExpenditureFormVisible, setIsExpenditureFormVisible } = useContext(BlizterContext);
+
+  function updateState(state) {
+    if (state === 0) return false;
+
+    return 0;
+  }
 
   useEffect(() => {
     if (!isExpenditureFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
@@ -20,6 +26,7 @@ function ExpenditureDropDown({ name }) {
     const newExpenditures = expenditures.filter(({ id }) => id !== deletedExpenditure.id);
 
     setExpenditures(newExpenditures);
+    setIsExpenditureFormVisible((prev) => updateState(prev));
   }
 
   return (
