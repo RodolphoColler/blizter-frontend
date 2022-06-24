@@ -2,8 +2,10 @@
   margin: 0;
 }
 
+.expend-categories-container::-webkit-scrollbar {
+  display: none;
+}
+
 .expend-categories-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  overflow-y: scroll;
 }

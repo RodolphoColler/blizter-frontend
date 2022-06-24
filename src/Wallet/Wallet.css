@@ -19,6 +19,7 @@
   background-color: #2e7ec8;
   border-radius: 10px;
   transition: 0.5s;
+  border: none;
 }
 
 .create-expend-button:hover {
