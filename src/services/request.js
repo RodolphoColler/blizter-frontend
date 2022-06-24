@@ -119,10 +119,10 @@ export async function getLastMonthSalary(date) {
   }
 }
 
-export async function createSalary(value) {
-  const date = moment().format('YYYY-MM-') + moment().daysInMonth();
+export async function createSalary(value, date) {
+  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
 
-  const { data: { salary } } = await axios.post('/salary', { value, date });
+  const { data: { salary } } = await axios.post('/salary', { value, date: formattedDate });
 
   return salary.value;
 }

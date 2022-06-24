@@ -7,7 +7,7 @@ import './SalaryForm.css';
 function SalaryForm({ setIsSalaryFormVisible }) {
   const [value, setValue] = useState('');
   const [formError, setFormError] = useState('');
-  const { setSalary } = useContext(BlizterContext);
+  const { setSalary, date } = useContext(BlizterContext);
 
   function validateForm() {
     if (!value) throw new Error('Value cannot be empty.');
@@ -20,7 +20,7 @@ function SalaryForm({ setIsSalaryFormVisible }) {
 
       validateForm();
 
-      const salary = await createSalary(Number(value));
+      const salary = await createSalary(Number(value), date);
 
       setSalary(salary);
 
