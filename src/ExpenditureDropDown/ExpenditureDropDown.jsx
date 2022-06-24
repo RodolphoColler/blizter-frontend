@@ -11,9 +11,9 @@ function ExpenditureDropDown({ name }) {
   const { date, isExpenditureFormVisible, setIsExpenditureFormVisible } = useContext(BlizterContext);
 
   function updateState(state) {
-    if (state === 0) return false;
+    if (state === null) return false;
 
-    return 0;
+    return null;
   }
 
   useEffect(() => {
