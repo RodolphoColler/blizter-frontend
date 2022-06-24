@@ -19,8 +19,8 @@ root.render(
           <Route path="/home" element={ <Home /> } />
           <Route path="/about" element={ <About /> } />
           <Route path="/login" element={ <Login /> } />
-          <Route path="/wallet" element={ <Wallet /> } />
           <Route path="/register" element={ <Register /> } />
+          <Route path="/wallet" element={ <Wallet /> } />
         </Routes>
       </BrowserRouter>
     </BlizterProvider>

@@ -16,15 +16,19 @@ const options = {
     },
   },
 };
+function getMonthComparison(lastMonthExpenses, expenses) {
+  if ((lastMonthExpenses - expenses) === 0) return 0;
 
+  if ((lastMonthExpenses - expenses) < 0) {
+    return Math.abs(((lastMonthExpenses * 100) / expenses).toFixed(0) - 100);
+  }
+
+  return (Math.abs(((expenses * 100) / lastMonthExpenses) - 100)).toFixed(0);
+}
 function DoughnutChartExpenses() {
   const [expenses, setExpenses] = useState(0);
   const [lastMonthExpenses, setLastMonthExpenses] = useState(0);
   const { date, isExpenditureFormVisible } = useContext(BlizterContext);
-
-  const monthComparisonPercentage = (lastMonthExpenses - expenses) < 0
-    ? Math.abs(((lastMonthExpenses * 100) / expenses).toFixed(0) - 100)
-    : (Math.abs(((expenses * 100) / lastMonthExpenses) - 100)).toFixed(0);
 
   useEffect(() => {
     if (!isExpenditureFormVisible) getMonthExpenditures(date).then((value) => setExpenses(value));
@@ -34,7 +38,7 @@ function DoughnutChartExpenses() {
   const doughnutData = {
     datasets: [
       {
-        data: [monthComparisonPercentage, 100 - monthComparisonPercentage],
+        data: [getMonthComparison(lastMonthExpenses, expenses), 100 - getMonthComparison(lastMonthExpenses, expenses)],
         backgroundColor: ['#336699', '#99CCFF00'],
       },
     ],
@@ -46,9 +50,9 @@ function DoughnutChartExpenses() {
       <div style={ { width: '200px' } }>
         <Doughnut data={ doughnutData } options={ { ...options } } />
       </div>
-      <p>{ `${monthComparisonPercentage}%`}</p>
+      <p>{ `${getMonthComparison(lastMonthExpenses, expenses)}%`}</p>
       <p>
-        {`${(lastMonthExpenses - expenses) < 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
+        {`${(lastMonthExpenses - expenses) <= 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
       </p>
     </div>
   );

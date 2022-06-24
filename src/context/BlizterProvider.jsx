@@ -16,7 +16,8 @@ function BlizterProvider({ children }) {
   }, [dateCount]);
 
   useEffect(() => {
-    if (!isUserLoggedIn && isExpenditureFormVisible) return;
+    if (!isUserLoggedIn) return;
+    if (isExpenditureFormVisible) return;
 
     getSalary(date)
       .then((data) => setSalary(data.value))
