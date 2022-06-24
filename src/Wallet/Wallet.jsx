@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ExpenditureForm from '../ExpenditureForm/ExpenditureForm';
 import { getUserCategories } from '../services/request';
 import Expenditures from '../Expenditures';
@@ -15,7 +16,14 @@ import BlizterContext from '../context/BlizterContext';
 function Wallet() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
   const [userCategories, setUserCategories] = useState([]);
+  const navigate = useNavigate();
   const { setIsUserLoggedIn, setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) return;
+
+    navigate('/login');
+  });
 
   useEffect(() => {
     setIsUserLoggedIn(true);
