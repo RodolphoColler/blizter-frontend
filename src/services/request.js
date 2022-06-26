@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 const userDateFormat = 'DD MMMM YYYY';
