@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import { useEffect, useContext, useState } from 'react';
 import BlizterContext from '../context/BlizterContext';
 import { getMonthExpenditures } from '../services/request';
-import './ShowSalary.css';
+import './ShowBalance.css';
 
-function ShowSalary({ setIsSalaryFormVisible }) {
+function ShowBalance({ setIsSalaryFormVisible }) {
   const [monthExpenditures, setMonthExpenditures] = useState(0);
   const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
 
@@ -19,8 +19,8 @@ function ShowSalary({ setIsSalaryFormVisible }) {
   );
 }
 
-ShowSalary.propTypes = {
+ShowBalance.propTypes = {
   setIsSalaryFormVisible: PropTypes.func.isRequired,
 };
 
-export default ShowSalary;
+export default ShowBalance;

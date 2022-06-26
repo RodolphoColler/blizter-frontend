@@ -10,7 +10,7 @@ import ShowDate from '../ShowDate';
 import BarChart from '../BarChart';
 import DoughnutChartSalary from '../DoughnutChartSalary';
 import DoughnutChartExpenses from '../DoughnutChartExpenses';
-import ShowSalary from '../ShowSalary/ShowSalary';
+import ShowBalance from '../ShowBalance';
 import BlizterContext from '../context/BlizterContext';
 
 function Wallet() {
@@ -61,7 +61,7 @@ function Wallet() {
           </aside>
           <div className="charts-container">
             <div className="chart-header">
-              <ShowSalary setIsSalaryFormVisible={ setIsSalaryFormVisible } />
+              <ShowBalance setIsSalaryFormVisible={ setIsSalaryFormVisible } />
               <ShowDate />
             </div>
             <div className="doughnuts-container">
