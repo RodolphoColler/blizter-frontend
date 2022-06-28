@@ -84,7 +84,7 @@ function Register() {
               />
               <hr />
             </label>
-            { formError && <p className="form-error">{ formError }</p>}
+            { formError && <p className="form-error">{ formError }</p> }
             <button type="submit">Register</button>
           </form>
         </div>
