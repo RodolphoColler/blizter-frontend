@@ -93,11 +93,7 @@
 }
 
 .register-page .form-error {
-  position: absolute;
   top: 330px;
-  color: #e55959;
-  margin-top: 5px;
-  font-size: 10px;
 }
 
 .register-page form button {

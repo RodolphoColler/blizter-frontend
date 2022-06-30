@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 function FormError({ error }) {
   if (!error) return;
 
-  return <p>{ error }</p>;
+  return <p className="form-error">{ error }</p>;
 }
 
 FormError.propTypes = {
