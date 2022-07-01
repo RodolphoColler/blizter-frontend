@@ -60,7 +60,8 @@
 }
 
 .signup-form .form-error {
-  top: 215px;
+  @include base.form-error;
+  top: 210px;
 }
 
 .signup-form button {

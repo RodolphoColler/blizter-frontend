@@ -1,0 +1,71 @@
+@use 'src/base';
+
+.signin-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background-color: #171821;
+}
+
+.signin-page h1 {
+  font-size: 40px;
+  color: base.$blue-base;
+  margin-bottom: 50px;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  height: 190px;
+}
+
+.signin-form label {
+  @include base.sign-form-label;
+}
+
+.signin-form hr {
+  @include base.sign-form-hr;
+}
+
+
+.signin-form input {
+  @include base.sign-form-input;
+}
+
+.signin-form .form-error {
+  @include base.form-error;
+  top: 125px;
+}
+
+.signin-form button {
+  @include base.button;
+  margin-top: 15px;
+  font-size: 15px;
+  height: 45px;
+}
+
+div > p {
+  text-align: center;
+  color: base.$light-gray;
+  margin: 10px 0px 10px 0px;
+}
+
+.signup-button {
+  @include base.button;
+  font-size: 15px;
+  height: 45px;
+  width: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  box-shadow: 0 0 0 30px #171821 inset !important;
+  -webkit-text-fill-color: #f1f0f3 !important;
+}
