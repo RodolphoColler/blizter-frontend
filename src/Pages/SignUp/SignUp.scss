@@ -1,0 +1,77 @@
+@use "src/base";
+
+.signup-page {
+  @include base.flex-center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.signup-welcome {
+  @include base.flex-center;
+  flex-direction: column;
+  position: relative;
+  flex: 3;
+  height: 100vh;
+  width: 65vw;
+}
+
+.signup-welcome h1 {
+  font-size: 70px;
+  margin-bottom: 30px;
+  color: base.$blue-base;
+}
+
+.signup-welcome p {
+  font-size: 22px;
+  color: base.$blue-base;
+}
+
+.signup-form-side {
+  @include base.flex-center;
+  flex: 1;
+  margin-right: 5%;
+}
+
+.signup-page aside > div {
+  height: 380px;
+  width: 320px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+  height: 100%;
+}
+
+.signup-page label {
+  @include base.sign-form-label
+}
+
+.signup-page input {
+  @include base.sign-form-input
+}
+
+.signup-page hr {
+  @include base.sign-form-hr
+}
+
+.signup-page .form-error {
+  top: 295px;
+}
+
+.signup-page form button {
+  @include base.button;
+  margin-top: 25px;
+  font-size: 15px;
+  height: 45px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  box-shadow: 0 0 0 30px #171821 inset !important;
+  -webkit-text-fill-color: #f1f0f3 !important;
+}

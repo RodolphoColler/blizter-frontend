@@ -7,7 +7,7 @@ function validateCredentials(email, password) {
   if (password.length < minPasswordLength) throw new Error('Password need to have at least 7 characters.');
 }
 
-export function validateRegister(email, name, password, confirmPassword) {
+export function validateSignUp(email, name, password, confirmPassword) {
   validateCredentials(email, password);
 
   if (!name) throw new Error('Name is required.');

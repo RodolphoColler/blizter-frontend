@@ -1,0 +1,55 @@
+$blue-base: #2d7dc8;
+$blue-base-hover: #126bbe;
+$white-text: #f1f0f3;
+$light-gray: #9d9faeb6;
+
+body {
+  background-color: #171821;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin sign-form-label {
+  height: 50px;
+  background-color: transparent;
+  color: $light-gray;
+  font-size: 15px;
+  font-weight: 700;
+  position: relative;
+}
+
+@mixin sign-form-input {
+  all: unset;
+  background-color: transparent;
+  margin: 5px 0px 0px 5px;
+  width: calc(100% - 5px);
+  font-size: large;
+  color: $white-text;
+}
+
+@mixin sign-form-hr {
+  height: 3px;
+  background-color: $light-gray;
+  width: 98%;
+  bottom: 3px;
+  border: none;
+  position: absolute;
+}
+
+@mixin button {
+  border-radius: 10px;
+  background-color: $blue-base;
+  color: $white-text;
+  border: none;
+  transition: 0.2s;
+  
+  &:hover {
+    background-color: $blue-base-hover;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+}
