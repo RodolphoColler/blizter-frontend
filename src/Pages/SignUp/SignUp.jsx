@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BlizterContext from '../../context/BlizterContext';
@@ -22,11 +21,9 @@ function SignUp() {
     try {
       validateSignUp(email, name, password, confirmPassword);
 
-      const { token } = await createUser({ email, name, password });
+      const token = await createUser({ email, name, password });
 
       localStorage.setItem('token', token);
-
-      axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
       setIsUserLoggedIn(true);
 
@@ -90,6 +87,8 @@ function SignUp() {
             <FormError error={ formError } />
             <button type="submit">Sign up</button>
           </form>
+          <p>or</p>
+          <button type="button" className="signin-button" onClick={ () => navigate('/signin') }>Sign in</button>
         </div>
       </aside>
     </main>

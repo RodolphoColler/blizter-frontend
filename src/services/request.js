@@ -8,11 +8,11 @@ const userDateFormat = 'DD MMMM YYYY';
 
 export async function login(body) {
   try {
-    const headers = { Authorization: localStorage.getItem('token') };
+    const { data: { token } } = await axios.post('/login', body);
 
-    const { data } = await axios.post('/login', body, { headers });
+    axios.defaults.headers.common.Authorization = token;
 
-    return data;
+    return token;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -20,9 +20,11 @@ export async function login(body) {
 
 export async function createUser(body) {
   try {
-    const { data } = await axios.post('/user', body);
+    const { data: { token } } = await axios.post('/user', body);
 
-    return data;
+    axios.defaults.headers.common.Authorization = token;
+
+    return token;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
