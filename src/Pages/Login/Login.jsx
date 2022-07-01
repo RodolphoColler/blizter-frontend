@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BlizterContext from '../context/BlizterContext';
-import { validateLogin } from '../services/formValidations';
-import { login } from '../services/request';
+import BlizterContext from '../../context/BlizterContext';
+import { validateLogin } from '../../services/formValidations';
+import { login } from '../../services/request';
 import './Login.css';
 
 function Login() {
