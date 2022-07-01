@@ -33,39 +33,54 @@
 }
 
 .signup-page aside > div {
-  height: 380px;
+  @include base.flex-center;
+  flex-direction: column;
+  height: 370px;
   width: 320px;
 }
 
 .signup-form {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   position: relative;
   height: 100%;
 }
 
-.signup-page label {
-  @include base.sign-form-label
+.signup-form label {
+  @include base.sign-form-label;
 }
 
-.signup-page input {
-  @include base.sign-form-input
+.signup-form input {
+  @include base.sign-form-input;
 }
 
-.signup-page hr {
-  @include base.sign-form-hr
+.signup-form hr {
+  @include base.sign-form-hr;
 }
 
-.signup-page .form-error {
-  top: 295px;
+.signup-form .form-error {
+  top: 215px;
 }
 
-.signup-page form button {
+.signup-form button {
   @include base.button;
   margin-top: 25px;
   font-size: 15px;
   height: 45px;
+}
+
+aside p {
+  text-align: center;
+  color: base.$light-gray;
+  margin: 10px 0px 10px 0px;
+}
+
+.signin-button {
+  @include base.button;
+  font-size: 15px;
+  height: 60px;
+  width: 100%;
 }
 
 input:-webkit-autofill,
