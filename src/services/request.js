@@ -6,7 +6,7 @@ axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 const userDateFormat = 'DD MMMM YYYY';
 
-export async function login(body) {
+export async function SignIn(body) {
   try {
     const { data: { token } } = await axios.post('/login', body);
 

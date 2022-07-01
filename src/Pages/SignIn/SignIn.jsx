@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BlizterContext from '../../context/BlizterContext';
-import { validateLogin } from '../../services/formValidations';
-import { login } from '../../services/request';
-import './Login.css';
+import FormError from '../../FormError/FormError';
+import { validateSignIn } from '../../services/formValidations';
+import { SignIn } from '../../services/request';
+import './SignIn.scss';
 
-function Login() {
+function SingIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formError, setFormError] = useState('');
@@ -17,13 +17,11 @@ function Login() {
     event.preventDefault();
 
     try {
-      validateLogin(email, password);
+      validateSignIn(email, password);
 
-      const { token } = await login({ email, password });
+      const token = await SignIn({ email, password });
 
       localStorage.setItem('token', token);
-
-      axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
       setIsUserLoggedIn(true);
 
@@ -33,11 +31,13 @@ function Login() {
     }
   }
 
+  useEffect(() => { setFormError(''); }, [email, password]);
+
   return (
-    <main className="login-page">
+    <main className="signin-page">
       <h1>Welcome Back :)</h1>
       <div>
-        <form className="login-form" onSubmit={ handleSubmit }>
+        <form className="signin-form" onSubmit={ handleSubmit }>
           <label htmlFor="email">
             Email
             <input
@@ -58,12 +58,14 @@ function Login() {
             />
             <hr />
           </label>
-          { formError && <p className="form-error">{ formError }</p>}
+          <FormError error={ formError } />
           <button type="submit">Sign in</button>
         </form>
+        <p>or</p>
+        <button type="button" className="signup-button" onClick={ () => navigate('/signup') }>Create account</button>
       </div>
     </main>
   );
 }
 
-export default Login;
+export default SingIn;

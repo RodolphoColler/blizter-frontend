@@ -14,7 +14,7 @@ export function validateSignUp(email, name, password, confirmPassword) {
   if (password !== confirmPassword) throw new Error('Passwords does not match.');
 }
 
-export function validateLogin(email, password) {
+export function validateSignIn(email, password) {
   validateCredentials(email, password);
 }
 
