@@ -4,9 +4,8 @@ import './index.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BlizterProvider from './context/BlizterProvider';
 import Wallet from './Wallet';
-import Home from './Home';
 import About from './About';
-import { SignUp, SignIn } from './Pages';
+import { SignUp, SignIn, Home } from './Pages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
