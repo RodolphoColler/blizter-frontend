@@ -25,7 +25,7 @@ function BarChart() {
 
   useEffect(() => {
     if (categories.length) getCategoriesExpenses().then((data) => setCategoriesExpense(data));
-  }, [categories]);
+  }, [categories, date]);
 
   const data = {
     labels: [...categories.map(({ name }) => name), 'salary'],

@@ -23,7 +23,7 @@ function Wallet() {
     if (localStorage.getItem('token')) return;
 
     navigate('/login');
-  });
+  }, []);
 
   useEffect(() => {
     setIsUserLoggedIn(true);

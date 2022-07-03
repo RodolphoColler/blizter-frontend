@@ -74,7 +74,7 @@ export async function getCategories() {
 export async function getExpenditures(category, date) {
   const userId = await getUserId();
 
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
+  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
   const url = `/expenditure/${userId}?date=${formattedDate}&category=${category}`;
 
@@ -93,7 +93,7 @@ export async function getSalary(date) {
   try {
     const userId = await getUserId();
 
-    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
+    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
     const url = `/salary/${userId}?date=${formattedDate}`;
 
@@ -109,7 +109,7 @@ export async function getLastMonthSalary(date) {
   try {
     const userId = await getUserId();
 
-    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().daysInMonth();
+    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
 
     const url = `/salary/${userId}?date=${formattedDate}`;
 
@@ -122,7 +122,7 @@ export async function getLastMonthSalary(date) {
 }
 
 export async function createSalary(value, date) {
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
+  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
   const { data: { salary } } = await axios.post('/salary', { value, date: formattedDate });
 
@@ -133,7 +133,7 @@ export async function getLastMonthExpenditures(date) {
   try {
     const userId = await getUserId();
 
-    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().daysInMonth();
+    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
 
     const url = `/expenditure/month/${userId}?date=${formattedDate}`;
 
@@ -149,7 +149,7 @@ export async function getMonthExpenditures(date) {
   try {
     const userId = await getUserId();
 
-    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
+    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
     const url = `/expenditure/month/${userId}?date=${formattedDate}`;
 
@@ -164,7 +164,7 @@ export async function getMonthExpenditures(date) {
 export async function getMonthExpenditureByCategory(category, date) {
   const userId = await getUserId();
 
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment().daysInMonth();
+  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
   const url = `/expenditure/month/${userId}?date=${formattedDate}&category=${category}`;
 
