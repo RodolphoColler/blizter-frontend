@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserCategories } from '../../services/request';
+import { getUserCategories } from '../../Services/request';
 import './Dashboard.css';
 import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../Components';
 import BlizterContext from '../../Context/BlizterContext';

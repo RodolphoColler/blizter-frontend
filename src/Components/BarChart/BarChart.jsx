@@ -2,7 +2,7 @@
 import Chart from 'chart.js/auto';
 import { useState, useEffect, useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { getMonthExpenditureByCategory, getUserCategories } from '../../services/request';
+import { getMonthExpenditureByCategory, getUserCategories } from '../../Services/request';
 import BlizterContext from '../../Context/BlizterContext';
 import './BarChart.css';
 

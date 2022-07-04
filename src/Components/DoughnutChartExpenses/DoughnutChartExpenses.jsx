@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import './DoughnutChartExpenses.css';
 import BlizterContext from '../../Context/BlizterContext';
-import { getLastMonthExpenditures, getMonthExpenditures } from '../../services/request';
+import { getLastMonthExpenditures, getMonthExpenditures } from '../../Services/request';
 
 const options = {
   rotation: -90,
@@ -16,6 +16,7 @@ const options = {
     },
   },
 };
+
 function getMonthComparison(lastMonthExpenses, expenses) {
   if ((lastMonthExpenses - expenses) === 0) return 0;
 

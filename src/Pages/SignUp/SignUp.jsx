@@ -2,8 +2,8 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import BlizterContext from '../../Context/BlizterContext';
 import FormError from '../../Components/FormError/FormError';
-import { validateSignUp } from '../../services/formValidations';
-import { createUser } from '../../services/request';
+import { validateSignUp } from '../../Services/formValidations';
+import { createUser } from '../../Services/request';
 import './SignUp.scss';
 
 function SignUp() {
