@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserCategories } from '../../Services/request';
+import { getUserCategories } from '../../services/request';
 import './Dashboard.css';
-import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../Components';
-import BlizterContext from '../../Context/BlizterContext';
+import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../components';
+import BlizterContext from '../../context/BlizterContext';
 
 function Dashboard() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
 import { useState, useEffect, useContext } from 'react';
-import { deleteExpenditure, getExpenditures } from '../../Services/request';
+import { deleteExpenditure, getExpenditures } from '../../services/request';
 import './ExpenditureDropDown.css';
-import BlizterContext from '../../Context/BlizterContext';
+import BlizterContext from '../../context/BlizterContext';
 
 function ExpenditureDropDown({ name }) {
   const [open, setOpen] = useState(false);

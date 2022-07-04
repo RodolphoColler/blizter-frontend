@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { validateExpenditure } from '../../Services/formValidations';
-import { createExpenditure, getCategories, updateUserCategories } from '../../Services/request';
+import { validateExpenditure } from '../../services/formValidations';
+import { createExpenditure, getCategories, updateUserCategories } from '../../services/request';
 import './ExpenditureForm.css';
 
 function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFormVisible }) {

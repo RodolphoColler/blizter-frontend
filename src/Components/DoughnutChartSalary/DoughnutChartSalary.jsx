@@ -2,9 +2,9 @@
 import Chart from 'chart.js/auto';
 import { useState, useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { getLastMonthSalary } from '../../Services/request';
+import { getLastMonthSalary } from '../../services/request';
 import './DoughnutChartSalary.css';
-import BlizterContext from '../../Context/BlizterContext';
+import BlizterContext from '../../context/BlizterContext';
 
 const options = {
   rotation: -90,

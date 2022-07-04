@@ -1,7 +1,7 @@
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { getSalary } from '../Services/request';
+import { getSalary } from '../services/request';
 import BlizterContext from './BlizterContext';
 
 function BlizterProvider({ children }) {
