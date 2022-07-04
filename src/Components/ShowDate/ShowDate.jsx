@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { MdArrowForwardIos } from 'react-icons/md';
-import BlizterContext from '../context/BlizterContext';
+import BlizterContext from '../../Context/BlizterContext';
 import './ShowDate.css';
 
 function ShowDate() {

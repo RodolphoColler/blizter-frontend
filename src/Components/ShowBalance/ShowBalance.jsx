@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useContext, useState } from 'react';
-import BlizterContext from '../context/BlizterContext';
-import { getMonthExpenditures } from '../services/request';
+import BlizterContext from '../../Context/BlizterContext';
+import { getMonthExpenditures } from '../../Services/request';
 import './ShowBalance.css';
 
 function ShowBalance({ setIsSalaryFormVisible }) {

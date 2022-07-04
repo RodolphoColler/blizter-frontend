@@ -3,8 +3,8 @@ import Chart from 'chart.js/auto';
 import { useState, useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import './DoughnutChartExpenses.css';
-import BlizterContext from '../context/BlizterContext';
-import { getLastMonthExpenditures, getMonthExpenditures } from '../services/request';
+import BlizterContext from '../../Context/BlizterContext';
+import { getLastMonthExpenditures, getMonthExpenditures } from '../../services/request';
 
 const options = {
   rotation: -90,

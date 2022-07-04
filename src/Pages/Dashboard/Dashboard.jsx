@@ -1,19 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ExpenditureForm from '../ExpenditureForm/ExpenditureForm';
-import { getUserCategories } from '../services/request';
-import Expenditures from '../Expenditures';
-import './Wallet.css';
-import Header from '../Header';
-import SalaryForm from '../SalaryForm';
-import ShowDate from '../ShowDate';
-import BarChart from '../BarChart';
-import DoughnutChartSalary from '../DoughnutChartSalary';
-import DoughnutChartExpenses from '../DoughnutChartExpenses';
-import ShowBalance from '../ShowBalance';
-import BlizterContext from '../context/BlizterContext';
+import { getUserCategories } from '../../services/request';
+import './Dashboard.css';
+import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../Components';
+import BlizterContext from '../../Context/BlizterContext';
 
-function Wallet() {
+function Dashboard() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
   const [userCategories, setUserCategories] = useState([]);
   const navigate = useNavigate();
@@ -22,7 +14,7 @@ function Wallet() {
   useEffect(() => {
     if (localStorage.getItem('token')) return;
 
-    navigate('/login');
+    navigate('/signin');
   }, []);
 
   useEffect(() => {
@@ -37,9 +29,9 @@ function Wallet() {
           <SalaryForm setIsSalaryFormVisible={ setIsSalaryFormVisible } />
         )
       }
-      <main className="wallet-page">
+      <main className="dashboard-page">
         <Header />
-        <div className="wallet-page-content">
+        <div className="dashboard-page-content">
           <aside>
             {
               isExpenditureFormVisible && (
@@ -76,4 +68,4 @@ function Wallet() {
   );
 }
 
-export default Wallet;
+export default Dashboard;

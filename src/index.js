@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import BlizterProvider from './context/BlizterProvider';
-import Wallet from './Wallet';
-import About from './About';
-import { SignUp, SignIn, Home } from './Pages';
+import BlizterProvider from './Context/BlizterProvider';
+import { SignUp, SignIn, Home, About, Dashboard } from './Pages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,7 +16,7 @@ root.render(
           <Route path="/about" element={ <About /> } />
           <Route path="/signin" element={ <SignIn /> } />
           <Route path="/signup" element={ <SignUp /> } />
-          <Route path="/wallet" element={ <Wallet /> } />
+          <Route path="/dashboard" element={ <Dashboard /> } />
         </Routes>
       </BrowserRouter>
     </BlizterProvider>

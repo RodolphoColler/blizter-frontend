@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import ExpenditureDropDown from '../ExpenditureDropDown';
+import { ExpenditureDropDown } from '..';
 import './Expenditures.css';
 
 function Expenditures({ userCategories }) {

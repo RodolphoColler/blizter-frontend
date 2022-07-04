@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BlizterContext from '../../context/BlizterContext';
-import FormError from '../../FormError/FormError';
+import BlizterContext from '../../Context/BlizterContext';
+import FormError from '../../Components/FormError/FormError';
 import { validateSignIn } from '../../services/formValidations';
 import { SignIn } from '../../services/request';
 import './SignIn.scss';
@@ -25,7 +25,7 @@ function SingIn() {
 
       setIsUserLoggedIn(true);
 
-      navigate('/wallet');
+      navigate('/dashboard');
     } catch (error) {
       setFormError(error.message);
     }

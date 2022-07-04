@@ -1,9 +1,9 @@
-.wallet-page {
+.dashboard-page {
   width: 100vw;
   height: 100vh;
 }
 
-.wallet-page-content {
+.dashboard-page-content {
   display: flex;
   align-items: center;
   height: calc(100% - 65px);
@@ -36,7 +36,7 @@ aside {
   margin: 20px;
 }
 
-.wallet-page-content div {
+.dashboard-page-content div {
   flex: 4;
 }
 
