@@ -1,11 +1,8 @@
-* {
-  margin: 0;
-}
-
 .expend-categories-container::-webkit-scrollbar {
   display: none;
 }
 
 .expend-categories-container {
   overflow-y: scroll;
+  
 }

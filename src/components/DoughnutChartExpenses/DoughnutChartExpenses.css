@@ -5,6 +5,7 @@
   position: relative;
   background-color: #2e2f3d;
   border-radius: 10px;
+  width: 45%;
 }
 
 .doughnut-expenses-container p {

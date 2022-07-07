@@ -44,7 +44,7 @@ function DoughnutChartSalary() {
   return (
     <div className="doughnut-salary-container">
       <p>YOU EARNED</p>
-      <div style={ { width: '200px' } }>
+      <div style={ { width: '200px', height: '200px' } }>
         <Doughnut data={ doughnutData } options={ { ...options } } />
       </div>
       <p>{ `${monthComparisonPercentage}%`}</p>
