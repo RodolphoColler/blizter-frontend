@@ -1,6 +1,11 @@
+@use 'src/base';
+
 .dashboard-page {
   width: 100vw;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .dashboard-page-content {
@@ -8,24 +13,6 @@
   align-items: center;
   height: calc(100% - 65px);
   width: 1300px;
-  margin-left: 105px;
-}
-
-.create-expend-button {
-  color: #f1f0f0;
-  height: 40px;
-  width: 100%;
-  margin-top: 20px;
-  background-color: #2e7ec8;
-  border-radius: 10px;
-  transition: 0.5s;
-  border: none;
-}
-
-.create-expend-button:hover {
-  cursor: pointer;
-  background-color: #277ac7;
-  transition: 0.5s;
 }
 
 aside {
@@ -33,16 +20,20 @@ aside {
   flex-direction: column;
   flex: 1;
   height: calc(100% - 65px);
-  margin: 20px;
 }
 
-.dashboard-page-content div {
-  flex: 4;
+.create-expend-button {
+  @include base.button;
+  font-size: 15px;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .charts-container {
   margin-left: 30px;
   width: 500px;
+  flex: 5;
 }
 
 .doughnuts-container {
@@ -52,8 +43,8 @@ aside {
 
 .chart-header {
   display: flex;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-around;
   margin-bottom: 10px;
   width: 100%;
 }

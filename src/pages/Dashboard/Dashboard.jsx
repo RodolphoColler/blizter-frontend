@@ -51,7 +51,7 @@ function Dashboard() {
             </button>
             <Expenditures userCategories={ userCategories } />
           </aside>
-          <div className="charts-container">
+          <section className="charts-container">
             <div className="chart-header">
               <ShowBalance setIsSalaryFormVisible={ setIsSalaryFormVisible } />
               <ShowDate />
@@ -61,7 +61,7 @@ function Dashboard() {
               <DoughnutChartExpenses />
             </div>
             <BarChart />
-          </div>
+          </section>
         </div>
       </main>
     </>
