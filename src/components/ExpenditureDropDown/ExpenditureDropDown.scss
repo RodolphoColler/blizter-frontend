@@ -1,3 +1,4 @@
+@use 'src/base';
 
 .expend-categories {
   all: unset;
@@ -6,7 +7,7 @@
   height: 40px;
   text-align: center;
   color: #f1f0f0;
-  margin-bottom: 15px;
+  margin-top: 13px;
   border-radius: 10px;
   transition: 0.2s ease-in;
 }
@@ -39,7 +40,7 @@ ul > div {
   padding: 5px 0px 5px 10px;
   font-size: 13px;
   margin-top: 5px;
-  color: #e6e4e4d3;
+  color: base.$white-text; 
   border-radius: 10px;
 }
 
@@ -63,18 +64,14 @@ ul > div {
 }
 
 .expend-item p {
-  color: #e6e4e4d3;
+  color: base.$white-text;
   position: absolute;
   right: 0px;
-  bottom: -10px;
+  bottom: -9px;
   transition: 0.3s ease-in;
 }
 
 .expend-item:hover p {
   transition: 0.2s ease-in;
   transform: translateX(-23px);
-}
-
-.expend-item:hover hr {
-  color: red;
 }
