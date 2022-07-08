@@ -1,18 +1,18 @@
 @use 'src/base';
 
 .dashboard-page {
-  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: min(100% - 4em, 1300px);
+  margin-inline: auto;
 }
 
 .dashboard-page-content {
   display: flex;
   align-items: center;
   height: calc(100% - 65px);
-  width: 1300px;
 }
 
 aside {
@@ -39,12 +39,13 @@ aside {
 .doughnuts-container {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .chart-header {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
 }

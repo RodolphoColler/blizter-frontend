@@ -1,7 +1,9 @@
+@use 'src/base';
+
 .wallet-header {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 100%;
   height: 65px;
 }
@@ -23,7 +25,7 @@
 .wallet-header li {
   all: unset;
   font-size: 15px;
-  color: rgb(231, 225, 225);
+  color: base.$white-text;
   padding: 5px;
   transition: 0.2s;
   border-radius: 5px;
@@ -31,7 +33,7 @@
 
 .wallet-header li:hover {
   cursor: pointer;
-  background-color: #337bbe;
+  background-color: base.$blue-base;
   transition: 0.2s;
 }
 
@@ -40,13 +42,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 9%;
-  margin-right: 300px;
-  color: #337bbe;
+  width: 140px;
+  color: base.$blue-base;
 }
 
 .blizter-logo p {
-  color: rgba(51,123,190);
+  color: base.$blue-base;
   font-weight: 800;
   font-size: 27px;
 }
