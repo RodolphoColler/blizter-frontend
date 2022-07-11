@@ -60,7 +60,9 @@ function Dashboard() {
               <DoughnutChartSalary />
               <DoughnutChartExpenses />
             </div>
-            <BarChart />
+            <div className="bar-chart-container">
+              <BarChart />
+            </div>
           </section>
         </div>
       </main>

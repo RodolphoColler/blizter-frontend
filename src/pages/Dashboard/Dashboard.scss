@@ -11,8 +11,9 @@
 
 .dashboard-page-content {
   display: flex;
-  align-items: center;
-  height: calc(100% - 65px);
+  align-items: baseline;
+  margin: 2.5em 0px;
+  height: calc(100% - 80px);
 }
 
 aside {
@@ -31,6 +32,9 @@ aside {
 }
 
 .charts-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   margin-left: 30px;
   width: 500px;
   flex: 5;
@@ -48,4 +52,8 @@ aside {
   justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
+}
+
+.bar-chart-container {
+  height: 100%;
 }

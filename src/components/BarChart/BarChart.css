@@ -1,4 +1,5 @@
-.bar-chart-container {
+.bar-chart {
   margin-top: 20px;
-  height: 320px;
+  height: 90%;
+  position: relative;
 }
