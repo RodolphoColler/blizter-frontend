@@ -6,11 +6,21 @@ axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 const userDateFormat = 'DD MMMM YYYY';
 
+export async function getUserId() {
+  const { data: { id } } = await axios.get('/token');
+
+  localStorage.setItem('userId', id);
+
+  return id;
+}
+
 export async function SignIn(body) {
   try {
     const { data: { token } } = await axios.post('/login', body);
 
     axios.defaults.headers.common.Authorization = token;
+
+    getUserId();
 
     return token;
   } catch (error) {
@@ -24,21 +34,17 @@ export async function createUser(body) {
 
     axios.defaults.headers.common.Authorization = token;
 
+    getUserId();
+
     return token;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
 }
 
-export async function getUserId() {
-  const { data: { id } } = await axios.get('/token');
-
-  return id;
-}
-
 export async function createExpenditure(body) {
   try {
-    const userId = await getUserId();
+    const userId = localStorage.getItem('userId');
 
     const formattedDate = moment(body.date, 'DD/MM/YYYY').format('YYYY-MM-DD');
 
@@ -51,7 +57,7 @@ export async function createExpenditure(body) {
 }
 
 export async function updateUserCategories(body) {
-  const userId = await getUserId();
+  const userId = localStorage.getItem('userId');
 
   const { data: { categories } } = await axios.patch(`user/category/${userId}`, body);
 
@@ -59,7 +65,7 @@ export async function updateUserCategories(body) {
 }
 
 export async function getUserCategories() {
-  const userId = await getUserId();
+  const userId = localStorage.getItem('userId');
   const { data: { categories } } = await axios.get(`/user/category/${userId}`);
 
   return categories;
@@ -72,7 +78,7 @@ export async function getCategories() {
 }
 
 export async function getExpenditures(category, date) {
-  const userId = await getUserId();
+  const userId = localStorage.getItem('userId');
 
   const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
@@ -91,7 +97,7 @@ export async function deleteExpenditure(id) {
 
 export async function getSalary(date) {
   try {
-    const userId = await getUserId();
+    const userId = localStorage.getItem('userId');
 
     const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
@@ -107,7 +113,7 @@ export async function getSalary(date) {
 
 export async function getLastMonthSalary(date) {
   try {
-    const userId = await getUserId();
+    const userId = localStorage.getItem('userId');
 
     const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
 
@@ -131,7 +137,7 @@ export async function createSalary(value, date) {
 
 export async function getLastMonthExpenditures(date) {
   try {
-    const userId = await getUserId();
+    const userId = localStorage.getItem('userId');
 
     const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
 
@@ -147,7 +153,7 @@ export async function getLastMonthExpenditures(date) {
 
 export async function getMonthExpenditures(date) {
   try {
-    const userId = await getUserId();
+    const userId = localStorage.getItem('userId');
 
     const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
@@ -162,7 +168,7 @@ export async function getMonthExpenditures(date) {
 }
 
 export async function getMonthExpenditureByCategory(category, date) {
-  const userId = await getUserId();
+  const userId = localStorage.getItem('userId');
 
   const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
