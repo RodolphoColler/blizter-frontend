@@ -1,11 +1,8 @@
 # Blizter
 
-Is a simple monthly budget planner that make your financial
-life easier.
+Is a simple monthly budget planner that make your financial life easier.
 
-This project is in development, so its is not complete and does not
-contain all the features that i planned. It gonna be updated with
-the time and i expect that you enjoy.
+This project is in development, so its is not complete and does not contain all the features that i planned. It gonna be updated with the time and i expect that you enjoy.
 
 ## How it works
 
@@ -18,5 +15,9 @@ email: test@gmail.com
 password: 1234567
 ```
 
-> Important, __if that page does not shows up it means that my backend is slepping__
-so keep calm and wait a little bit.
+> Important, __if that page does not shows up it means that my backend is slepping__ so keep calm and wait a little bit.
+
+## Extra content
+
+This is front-end repository, if you wanna see more details click in the [Link](https://github.com/RodolphoColler/blizter-backend) to go to the back-end repository.
+
