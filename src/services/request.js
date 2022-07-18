@@ -20,7 +20,7 @@ export async function SignIn(body) {
 
     axios.defaults.headers.common.Authorization = token;
 
-    getUserId();
+    await getUserId();
 
     return token;
   } catch (error) {
@@ -34,7 +34,7 @@ export async function createUser(body) {
 
     axios.defaults.headers.common.Authorization = token;
 
-    getUserId();
+    await getUserId();
 
     return token;
   } catch (error) {
