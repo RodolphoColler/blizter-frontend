@@ -33,8 +33,11 @@
   width: 250px;
 }
 
-.nav-link {
+li {
   all: unset;
+}
+
+.nav-link {
   font-size: 15px;
   padding: 8px;
   transition: 0.2s;

@@ -12,6 +12,10 @@
   transition: 0.2s ease-in;
 }
 
+.expend-categories:nth-child(1) {
+  margin-top: 0px;
+}
+
 .expend-categories:hover {
   background-color: #1f2029;
   transition: 0.2s ease-in;

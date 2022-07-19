@@ -13,22 +13,21 @@
   display: flex;
   align-items: baseline;
   margin: 2.5em 0px;
-  height: calc(100% - 80px);
+  height: calc(100vh - 80px);
+  width: 100%;
 }
 
 aside {
-  display: flex;
-  flex-direction: column;
   flex: 1;
-  height: calc(100% - 65px);
+  height: 600px;
 }
 
 .create-expend-button {
   @include base.button;
   font-size: 15px;
   height: 40px;
-  width: 100%;
-  margin-bottom: 5px;
+  width: 320px;
+  margin-bottom: 18px;
 }
 
 .charts-container {
@@ -36,7 +35,7 @@ aside {
   flex-direction: column;
   height: 100%;
   margin-left: 30px;
-  width: 500px;
+  width: 100%;
   flex: 5;
 }
 
