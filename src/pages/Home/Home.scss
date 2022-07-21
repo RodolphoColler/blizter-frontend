@@ -9,3 +9,59 @@
   margin-inline: auto;
 }
 
+.home-page img {
+  width: 48%;
+  height: 78%;
+
+  @media screen and (max-width: 900px) {
+    display: none;
+  }
+}
+
+.home-content {
+  @include base.flex-center;
+  justify-content: space-between;
+  margin: 2.5em 0px;
+  height: calc(100vh - 70px - 5em);
+  width: min(100% - 4em, 1100px);
+}
+
+.text-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 450px;
+}
+
+.home-content h1 {
+  font-size: 70px;
+  font-family: 'Fredoka', sans-serif;
+  color: base.$blue-base;
+}
+
+.home-content p {
+  color: base.$blue-base;
+  font-size: 28px;
+  font-weight: 800;
+  text-align: justify;
+}
+
+.home-content p:nth-child(2) {
+  margin: 2em 0em;
+  font-size: 20px;
+  font-weight: 300;
+  color: base.$white-text;
+}
+
+.home-content a {
+  all: unset;
+  @include base.button;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  height: 55px;
+  width: 170px;
+  padding-left: 10px;
+  text-align: center;
+}
+
