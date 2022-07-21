@@ -1,6 +1,14 @@
+import { Header } from '../../components';
+import './Home.scss';
+
 function Home() {
   return (
-    <h1>In building</h1>
+    <main className="home-page">
+      <Header />
+      <div>
+        <h1>Blizter</h1>
+      </div>
+    </main>
   );
 }
 

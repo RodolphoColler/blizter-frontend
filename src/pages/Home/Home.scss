@@ -1,0 +1,11 @@
+@use "src/base";
+
+.home-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: min(100% - 4em, 1300px);
+  margin-inline: auto;
+}
+
