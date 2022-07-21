@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 140px;
+width: 140px;
   color: base.$blue-base;
 }
 
@@ -21,10 +21,6 @@
   color: base.$blue-base;
   font-size: 32px;
   font-family: 'Fredoka', sans-serif;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .wallet-header ul {
@@ -53,6 +49,10 @@ li {
 a {
   text-decoration: none;
   color: base.$white-text;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .nav-link-selected {
