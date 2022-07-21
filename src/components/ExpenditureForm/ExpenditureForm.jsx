@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { validateExpenditure } from '../../services/formValidations';
@@ -42,8 +44,14 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
     }
   }
 
+  function handleClickOutside({ target }) {
+    if (target.classList.contains('darker-background')) {
+      setIsExpenditureFormVisible(false);
+    }
+  }
+
   return (
-    <div className="darker-background">
+    <div className="darker-background" onClick={ (event) => handleClickOutside(event) }>
       <form className="expenditure-form" onSubmit={ handleSubmit }>
         <label htmlFor="value">
           Description

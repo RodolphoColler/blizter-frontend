@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import BlizterContext from '../../context/BlizterContext';
@@ -7,7 +9,7 @@ import './SalaryForm.css';
 function SalaryForm({ setIsSalaryFormVisible }) {
   const [value, setValue] = useState('');
   const [formError, setFormError] = useState('');
-  const { setSalary, date } = useContext(BlizterContext);
+  const { setSalary, date, salary } = useContext(BlizterContext);
 
   function validateForm() {
     if (!value) throw new Error('Value cannot be empty.');
@@ -20,9 +22,9 @@ function SalaryForm({ setIsSalaryFormVisible }) {
 
       validateForm();
 
-      const salary = await createSalary(Number(value), date);
+      const newSalary = await createSalary(Number(value), date);
 
-      setSalary(salary);
+      setSalary(newSalary);
 
       setIsSalaryFormVisible(false);
     } catch (error) {
@@ -30,8 +32,14 @@ function SalaryForm({ setIsSalaryFormVisible }) {
     }
   }
 
+  function handleClickOutside({ target }) {
+    if (target.classList.contains('darker-background') && salary) {
+      setIsExpenditureFormVisible(false);
+    }
+  }
+
   return (
-    <div className="darker-background">
+    <div className="darker-background" onClick={ (event) => handleClickOutside(event) }>
       <form className="salary-form" onSubmit={ handleSubmit }>
         <h3>Insert here your salary</h3>
         <label htmlFor="value">
