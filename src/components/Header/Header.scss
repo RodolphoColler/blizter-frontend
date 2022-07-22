@@ -26,38 +26,36 @@ width: 140px;
 .wallet-header ul {
   display: flex;
   justify-content: space-between;
-  width: 250px;
+  width: 265px;
 }
 
 li {
   all: unset;
 }
 
-.nav-link {
+a {
+  text-decoration: none;
+  color: base.$white-text;
   font-size: 15px;
   padding: 8px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.nav-link {
   transition: 0.2s;
   border-radius: 5px;
 
   &:hover {
-    cursor: pointer;
     background-color: base.$blue-base;
     transition: 0.2s;
   }
 }
 
-a {
-  text-decoration: none;
-  color: base.$white-text;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
 
 .nav-link-selected {
   background-color: base.$blue-base;
-  font-size: 15px;
-  padding: 8px;
   border-radius: 5px;
 }

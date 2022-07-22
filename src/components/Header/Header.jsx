@@ -13,14 +13,14 @@ function Header() {
       </Link>
       <nav>
         <ul>
-          <li className={ `nav-link${pathname === '/about' ? '-selected' : ''}` }>
-            <Link to="/about">About</Link>
+          <li>
+            <Link to="/about" className={ `nav-link${pathname === '/about' ? '-selected' : ''}` }>About</Link>
           </li>
-          <li className={ `nav-link${pathname === '/home' ? '-selected' : ''}` }>
-            <Link to="/home">Home</Link>
+          <li>
+            <Link to="/home" className={ `nav-link${pathname === '/home' ? '-selected' : ''}` }>Home</Link>
           </li>
-          <li className={ `nav-link${pathname === '/dashboard' ? '-selected' : ''}` }>
-            <Link to="/dashboard">Dashboard</Link>
+          <li>
+            <Link to="/dashboard" className={ `nav-link${pathname === '/dashboard' ? '-selected' : ''}` }>Dashboard</Link>
           </li>
         </ul>
       </nav>
