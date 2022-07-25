@@ -1,0 +1,20 @@
+@use "src/base";
+
+.about-page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: min(100% - 4em, 1300px);
+  margin-inline: auto;
+}
+
+.about-content {
+  @include base.flex-center;
+  justify-content: space-between;
+  margin: 2.5em 0px;
+  height: calc(100vh - 70px - 5em);
+  width: min(100% - 4em, 1100px);
+  color: base.$blue-base;
+  font-size: 30px;
+}
