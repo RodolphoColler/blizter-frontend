@@ -7,11 +7,15 @@ axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 const userDateFormat = 'DD MMMM YYYY';
 
 export async function getUserId() {
-  const { data: { id } } = await axios.get('/token');
+  try {
+    const { data: { id } } = await axios.get('/token');
 
-  localStorage.setItem('userId', id);
+    localStorage.setItem('userId', id);
 
-  return id;
+    return id;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function SignIn(body) {

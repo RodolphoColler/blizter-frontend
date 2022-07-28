@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import BlizterContext from '../../context/BlizterContext';
 import FormError from '../../components/FormError/FormError';
 import { validateSignIn } from '../../services/formValidations';
-import { SignIn } from '../../services/request';
+import { getUserId, SignIn } from '../../services/request';
 import './SignIn.scss';
 
 function SingIn() {
@@ -33,9 +33,20 @@ function SingIn() {
 
   useEffect(() => { setFormError(''); }, [email, password]);
 
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('token')) {
+        getUserId();
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      setFormError('');
+    }
+  }, []);
+
   return (
     <main className="signin-page">
-      <h1>Welcome Back :)</h1>
+      <h1>Welcome back :)</h1>
       <div>
         <form className="signin-form" onSubmit={ handleSubmit }>
           <label htmlFor="email">
