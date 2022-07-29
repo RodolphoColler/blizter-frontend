@@ -81,12 +81,10 @@ export async function getCategories() {
   return categories;
 }
 
-export async function getExpenditures(category, date) {
-  const userId = localStorage.getItem('userId');
-
+export async function getExpenditures(date) {
   const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
-  const url = `/expenditure/${userId}?date=${formattedDate}&category=${category}`;
+  const url = `/expenditure/?date=${formattedDate}`;
 
   const { data: { expenditures } } = await axios.get(url);
 

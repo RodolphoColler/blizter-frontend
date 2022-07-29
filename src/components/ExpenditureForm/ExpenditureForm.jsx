@@ -3,10 +3,10 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { validateExpenditure } from '../../services/formValidations';
-import { createExpenditure, getCategories, updateUserCategories } from '../../services/request';
+import { createExpenditure, getCategories } from '../../services/request';
 import './ExpenditureForm.css';
 
-function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFormVisible }) {
+function ExpenditureForm({ setIsExpenditureFormVisible }) {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
@@ -18,23 +18,11 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
     getCategories().then((data) => setCategories(data));
   }, []);
 
-  async function updateUser() {
-    const isUserCategoryExistent = userCategories.find(({ name }) => name === category);
-
-    if (!isUserCategoryExistent) {
-      const newCategoryId = categories[categories.findIndex(({ name }) => name === category)].id;
-      const newCategories = await updateUserCategories({ categoryId: newCategoryId });
-      setUserCategories(newCategories);
-    }
-  }
-
   async function handleSubmit(event) {
     event.preventDefault();
 
     try {
       validateExpenditure(description, value, date);
-
-      await updateUser();
 
       await createExpenditure({ description, value: Number(value), date, category });
 
@@ -107,8 +95,6 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
 }
 
 ExpenditureForm.propTypes = {
-  setUserCategories: PropTypes.func.isRequired,
-  userCategories: PropTypes.arrayOf(Object).isRequired,
   setIsExpenditureFormVisible: PropTypes.func.isRequired,
 };
 
