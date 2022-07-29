@@ -26,11 +26,7 @@ function Dashboard() {
         <Header />
         <div className="dashboard-page-content">
           <aside>
-            {
-              isExpenditureFormVisible && (
-                <ExpenditureForm setIsExpenditureFormVisible={ setIsExpenditureFormVisible } />
-              )
-            }
+            { isExpenditureFormVisible && <ExpenditureForm /> }
             <button
               type="button"
               className="create-expend-button"

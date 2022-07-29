@@ -1,18 +1,19 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { validateExpenditure } from '../../services/formValidations';
 import { createExpenditure, getCategories } from '../../services/request';
+import BlizterContext from '../../context/BlizterContext';
 import './ExpenditureForm.css';
 
-function ExpenditureForm({ setIsExpenditureFormVisible }) {
+function ExpenditureForm() {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  const [category, setCategory] = useState('Education');
+  const [category, setCategory] = useState(1);
   const [date, setDate] = useState('');
   const [formError, setFormError] = useState('');
+  const { setIsExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
@@ -24,7 +25,7 @@ function ExpenditureForm({ setIsExpenditureFormVisible }) {
     try {
       validateExpenditure(description, value, date);
 
-      await createExpenditure({ description, value: Number(value), date, category });
+      await createExpenditure({ description, value: Number(value), date, categoryId: Number(category) });
 
       setIsExpenditureFormVisible(false);
     } catch (error) {
@@ -68,8 +69,8 @@ function ExpenditureForm({ setIsExpenditureFormVisible }) {
             value={ category }
             onChange={ (e) => setCategory(e.target.value) }
           >
-            { categories.map(({ name }) => (
-              <option value={ name } key={ name }>{name}</option>
+            { categories.map(({ name, id }) => (
+              <option value={ id } key={ id }>{name}</option>
             )) }
           </select>
         </label>
@@ -93,9 +94,5 @@ function ExpenditureForm({ setIsExpenditureFormVisible }) {
     </div>
   );
 }
-
-ExpenditureForm.propTypes = {
-  setIsExpenditureFormVisible: PropTypes.func.isRequired,
-};
 
 export default ExpenditureForm;
