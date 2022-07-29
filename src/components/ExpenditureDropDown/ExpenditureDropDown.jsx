@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import { FiTrash2 } from 'react-icons/fi';
-import { useState, useEffect, useContext } from 'react';
-import { deleteExpenditure, getExpenditures } from '../../services/request';
+import { useState, useContext, useEffect } from 'react';
+import { deleteExpenditure } from '../../services/request';
 import BlizterContext from '../../context/BlizterContext';
 import './ExpenditureDropDown.scss';
 
-function ExpenditureDropDown({ name }) {
+function ExpenditureDropDown({ category, expenditures }) {
   const [open, setOpen] = useState(false);
-  const [expenditures, setExpenditures] = useState([]);
-  const { date, isExpenditureFormVisible, setIsExpenditureFormVisible } = useContext(BlizterContext);
+  const [expendituresByCategory, setExpendituresByCategory] = useState([]);
+  const { setIsExpenditureFormVisible } = useContext(BlizterContext);
 
   function updateState(state) {
     if (state === null) return false;
@@ -17,29 +17,31 @@ function ExpenditureDropDown({ name }) {
   }
 
   useEffect(() => {
-    if (!isExpenditureFormVisible) getExpenditures(name, date).then((data) => { setExpenditures(data); });
-  }, [name, isExpenditureFormVisible, date]);
+    setExpendituresByCategory(expenditures);
+  }, []);
 
   async function removeExpenditure({ currentTarget }) {
     const deletedExpenditure = await deleteExpenditure(currentTarget.id);
 
-    const newExpenditures = expenditures.filter(({ id }) => id !== deletedExpenditure.id);
+    const newExpenditures = expendituresByCategory.filter(({ id }) => id !== deletedExpenditure.id);
 
-    setExpenditures(newExpenditures);
+    console.log(newExpenditures);
+
+    setExpendituresByCategory(newExpenditures);
     setIsExpenditureFormVisible((prev) => updateState(prev));
   }
 
   return (
     <>
       <button type="button" className="expend-categories" onClick={ () => { setOpen(!open); } }>
-        { name }
+        { category }
       </button>
       {
         open
         && (
           <ul>
             {
-              expenditures.map(({ description, value, id }) => (
+              expendituresByCategory.map(({ description, value, id }) => (
                 <li className="expend-item" key={ id }>
                   { description }
                   <span>
@@ -59,7 +61,8 @@ function ExpenditureDropDown({ name }) {
 }
 
 ExpenditureDropDown.propTypes = {
-  name: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  expenditures: PropTypes.arrayOf(Object).isRequired,
 };
 
 export default ExpenditureDropDown;
