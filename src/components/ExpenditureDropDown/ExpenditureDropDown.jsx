@@ -16,16 +16,12 @@ function ExpenditureDropDown({ category, expenditures }) {
     return null;
   }
 
-  useEffect(() => {
-    setExpendituresByCategory(expenditures);
-  }, []);
+  useEffect(() => setExpendituresByCategory(expenditures), [expenditures]);
 
   async function removeExpenditure({ currentTarget }) {
     const deletedExpenditure = await deleteExpenditure(currentTarget.id);
 
     const newExpenditures = expendituresByCategory.filter(({ id }) => id !== deletedExpenditure.id);
-
-    console.log(newExpenditures);
 
     setExpendituresByCategory(newExpenditures);
     setIsExpenditureFormVisible((prev) => updateState(prev));

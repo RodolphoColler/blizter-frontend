@@ -27,10 +27,12 @@ function Expenditures() {
 
     const formattedObject = arrayToObject(expends);
 
-    setExpenditures(formattedObject);
+    return formattedObject;
   }
 
-  useEffect(() => { formattedExpenditures(); }, [date, isExpenditureFormVisible]);
+  useEffect(() => {
+    if (!isExpenditureFormVisible) formattedExpenditures().then((data) => setExpenditures(data));
+  }, [date, isExpenditureFormVisible]);
 
   return (
     <div className="expend-categories-container">
