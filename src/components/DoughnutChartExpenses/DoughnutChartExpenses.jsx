@@ -26,14 +26,19 @@ function getMonthComparison(lastMonthExpenses, expenses) {
 
   return (Math.abs(((expenses * 100) / lastMonthExpenses) - 100)).toFixed(0);
 }
+
+function sum(numbers) {
+  return numbers.reduce((acc, cur) => acc + cur.sum, 0);
+}
+
 function DoughnutChartExpenses() {
   const [expenses, setExpenses] = useState(0);
   const [lastMonthExpenses, setLastMonthExpenses] = useState(0);
   const { date, isExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
-    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((value) => setExpenses(value));
-    getLastMonthExpenditures(date).then((value) => setLastMonthExpenses(value));
+    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((data) => setExpenses(sum(data)));
+    getLastMonthExpenditures(date).then((data) => setLastMonthExpenses(sum(data)));
   }, [date, isExpenditureFormVisible]);
 
   const doughnutData = {
