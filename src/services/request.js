@@ -139,15 +139,13 @@ export async function createSalary(value, date) {
 
 export async function getLastMonthExpenditures(date) {
   try {
-    const userId = localStorage.getItem('userId');
-
     const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
 
-    const url = `/expenditure/month/${userId}?date=${formattedDate}`;
+    const url = `/expenditure/month?date=${formattedDate}`;
 
-    const { data: { monthExpense: { value } } } = await axios.get(url);
+    const { data: { monthExpense } } = await axios.get(url);
 
-    return value;
+    return monthExpense;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -155,28 +153,14 @@ export async function getLastMonthExpenditures(date) {
 
 export async function getMonthExpenditures(date) {
   try {
-    const userId = localStorage.getItem('userId');
-
     const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
 
-    const url = `/expenditure/month/${userId}?date=${formattedDate}`;
+    const url = `/expenditure/month?date=${formattedDate}`;
 
-    const { data: { monthExpense: { value } } } = await axios.get(url);
+    const { data: { monthExpense } } = await axios.get(url);
 
-    return value;
+    return monthExpense;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
-}
-
-export async function getMonthExpenditureByCategory(category, date) {
-  const userId = localStorage.getItem('userId');
-
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
-
-  const url = `/expenditure/month/${userId}?date=${formattedDate}&category=${category}`;
-
-  const { data: { monthExpense: { value } } } = await axios.get(url);
-
-  return value;
 }
