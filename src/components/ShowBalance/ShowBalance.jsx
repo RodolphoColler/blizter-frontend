@@ -9,7 +9,13 @@ function ShowBalance({ setIsSalaryFormVisible }) {
   const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
-    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((value) => setMonthExpenditures(value));
+    if (!isExpenditureFormVisible) {
+      getMonthExpenditures(date)
+        .then((data) => {
+          const result = data.reduce((acc, cur) => acc + cur.sum, 0);
+          setMonthExpenditures(result);
+        });
+    }
   }, [date, isExpenditureFormVisible]);
 
   useEffect(() => { if (!salary) setIsSalaryFormVisible(true); }, [salary]);
