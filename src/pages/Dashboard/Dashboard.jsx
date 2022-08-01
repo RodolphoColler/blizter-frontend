@@ -1,25 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getUserCategories } from '../../services/request';
 import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../components';
 import BlizterContext from '../../context/BlizterContext';
 import './Dashboard.scss';
 
 function Dashboard() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
-  const [userCategories, setUserCategories] = useState([]);
   const navigate = useNavigate();
-  const { setIsUserLoggedIn, setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
+  const { setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
     if (localStorage.getItem('token')) return;
 
     navigate('/signin');
-  }, []);
-
-  useEffect(() => {
-    setIsUserLoggedIn(true);
-    getUserCategories().then((data) => setUserCategories(data));
   }, []);
 
   return (
@@ -33,15 +26,7 @@ function Dashboard() {
         <Header />
         <div className="dashboard-page-content">
           <aside>
-            {
-              isExpenditureFormVisible && (
-                <ExpenditureForm
-                  setIsExpenditureFormVisible={ setIsExpenditureFormVisible }
-                  userCategories={ userCategories }
-                  setUserCategories={ setUserCategories }
-                />
-              )
-            }
+            { isExpenditureFormVisible && <ExpenditureForm /> }
             <button
               type="button"
               className="create-expend-button"
@@ -49,7 +34,7 @@ function Dashboard() {
             >
               Create Expend
             </button>
-            <Expenditures userCategories={ userCategories } />
+            <Expenditures />
           </aside>
           <section className="charts-container">
             <div className="chart-header">

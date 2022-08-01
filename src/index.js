@@ -8,17 +8,15 @@ import { SignUp, SignIn, Home, About, Dashboard } from './pages';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BlizterProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={ <Navigate to="/signin" /> } />
-          <Route path="/home" element={ <Home /> } />
-          <Route path="/about" element={ <About /> } />
-          <Route path="/signin" element={ <SignIn /> } />
-          <Route path="/signup" element={ <SignUp /> } />
-          <Route path="/dashboard" element={ <Dashboard /> } />
-        </Routes>
-      </BrowserRouter>
-    </BlizterProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <Navigate to="/signin" /> } />
+        <Route path="/home" element={ <Home /> } />
+        <Route path="/about" element={ <About /> } />
+        <Route path="/signin" element={ <SignIn /> } />
+        <Route path="/signup" element={ <SignUp /> } />
+        <Route path="/dashboard" element={ <BlizterProvider><Dashboard /></BlizterProvider> } />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>,
 );

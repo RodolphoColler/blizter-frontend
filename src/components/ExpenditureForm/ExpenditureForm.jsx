@@ -1,32 +1,23 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { validateExpenditure } from '../../services/formValidations';
-import { createExpenditure, getCategories, updateUserCategories } from '../../services/request';
+import { createExpenditure, getCategories } from '../../services/request';
+import BlizterContext from '../../context/BlizterContext';
 import './ExpenditureForm.css';
 
-function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFormVisible }) {
+function ExpenditureForm() {
   const [categories, setCategories] = useState([]);
   const [description, setDescription] = useState('');
   const [value, setValue] = useState('');
-  const [category, setCategory] = useState('Education');
+  const [category, setCategory] = useState(1);
   const [date, setDate] = useState('');
   const [formError, setFormError] = useState('');
+  const { setIsExpenditureFormVisible } = useContext(BlizterContext);
 
   useEffect(() => {
     getCategories().then((data) => setCategories(data));
   }, []);
-
-  async function updateUser() {
-    const isUserCategoryExistent = userCategories.find(({ name }) => name === category);
-
-    if (!isUserCategoryExistent) {
-      const newCategoryId = categories[categories.findIndex(({ name }) => name === category)].id;
-      const newCategories = await updateUserCategories({ categoryId: newCategoryId });
-      setUserCategories(newCategories);
-    }
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -34,9 +25,7 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
     try {
       validateExpenditure(description, value, date);
 
-      await updateUser();
-
-      await createExpenditure({ description, value: Number(value), date, category });
+      await createExpenditure({ description, value: Number(value), date, categoryId: Number(category) });
 
       setIsExpenditureFormVisible(false);
     } catch (error) {
@@ -80,8 +69,8 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
             value={ category }
             onChange={ (e) => setCategory(e.target.value) }
           >
-            { categories.map(({ name }) => (
-              <option value={ name } key={ name }>{name}</option>
+            { categories.map(({ name, id }) => (
+              <option value={ id } key={ id }>{name}</option>
             )) }
           </select>
         </label>
@@ -105,11 +94,5 @@ function ExpenditureForm({ userCategories, setUserCategories, setIsExpenditureFo
     </div>
   );
 }
-
-ExpenditureForm.propTypes = {
-  setUserCategories: PropTypes.func.isRequired,
-  userCategories: PropTypes.arrayOf(Object).isRequired,
-  setIsExpenditureFormVisible: PropTypes.func.isRequired,
-};
 
 export default ExpenditureForm;

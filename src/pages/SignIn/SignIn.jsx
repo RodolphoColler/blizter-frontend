@@ -1,6 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BlizterContext from '../../context/BlizterContext';
 import FormError from '../../components/FormError/FormError';
 import { validateSignIn } from '../../services/formValidations';
 import { getUserId, SignIn } from '../../services/request';
@@ -10,7 +9,6 @@ function SingIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formError, setFormError] = useState('');
-  const { setIsUserLoggedIn } = useContext(BlizterContext);
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -22,8 +20,6 @@ function SingIn() {
       const token = await SignIn({ email, password });
 
       localStorage.setItem('token', token);
-
-      setIsUserLoggedIn(true);
 
       navigate('/dashboard');
     } catch (error) {

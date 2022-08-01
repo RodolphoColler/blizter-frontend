@@ -1,6 +1,5 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import BlizterContext from '../../context/BlizterContext';
 import FormError from '../../components/FormError/FormError';
 import { validateSignUp } from '../../services/formValidations';
 import { createUser } from '../../services/request';
@@ -12,7 +11,6 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formError, setFormError] = useState('');
-  const { setIsUserLoggedIn } = useContext(BlizterContext);
   const navigate = useNavigate();
 
   async function handleSubmit(event) {
@@ -24,8 +22,6 @@ function SignUp() {
       const token = await createUser({ email, name, password });
 
       localStorage.setItem('token', token);
-
-      setIsUserLoggedIn(true);
 
       navigate('/dashboard');
     } catch (error) {
