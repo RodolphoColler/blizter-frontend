@@ -62,10 +62,10 @@ div > p {
   width: 100%;
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
+.signin-form input:-webkit-autofill,
+.signin-form input:-webkit-autofill:hover,
+.signin-form input:-webkit-autofill:focus, 
+.signin-form input:-webkit-autofill:active{
   box-shadow: 0 0 0 30px #171821 inset !important;
   -webkit-text-fill-color: #f1f0f3 !important;
 }
