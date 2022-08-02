@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import BlizterContext from '../../context/BlizterContext';
 import { createSalary } from '../../services/request';
-import './SalaryForm.css';
+import './SalaryForm.scss';
 
 function SalaryForm({ setIsSalaryFormVisible }) {
   const [value, setValue] = useState('');
