@@ -1,27 +1,28 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance } from '../../components';
+import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance, NotSignedModal } from '../../components';
 import BlizterContext from '../../context/BlizterContext';
+import { getUserId } from '../../services/request';
 import './Dashboard.scss';
 
 function Dashboard() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
-  const navigate = useNavigate();
+  const [isSignedModalVisible, setIsSignedModalVisible] = useState(false);
   const { setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) return;
+  async function validateSign() {
+    try {
+      await getUserId();
+    } catch (error) {
+      setIsSignedModalVisible(true);
+    }
+  }
 
-    navigate('/signin');
-  }, []);
+  useEffect(() => { validateSign(); }, []);
 
   return (
     <>
-      {
-        isSalaryFormVisible && (
-          <SalaryForm setIsSalaryFormVisible={ setIsSalaryFormVisible } />
-        )
-      }
+      { isSignedModalVisible && <NotSignedModal /> }
+      { isSalaryFormVisible && <SalaryForm setIsSalaryFormVisible={ setIsSalaryFormVisible } /> }
       <main className="dashboard-page">
         <Header />
         <div className="dashboard-page-content">
