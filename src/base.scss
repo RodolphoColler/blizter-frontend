@@ -2,6 +2,7 @@ $blue-base: #2d7dc8;
 $blue-base-hover: #126bbe;
 $white-text: #f1f0f3;
 $light-gray: #9d9faeb6;
+$light-black-base: #2e2f3d;
 
 body {
   background-color: #171821;
@@ -17,6 +18,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin flex-center-column {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 @mixin sign-form-label {
@@ -63,4 +70,15 @@ body {
     transition: 0.2s;
     cursor: pointer;
   }
+}
+
+@mixin modal-background {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 1;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgba(0,0,0,0.3);
 }

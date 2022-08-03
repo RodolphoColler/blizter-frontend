@@ -1,0 +1,32 @@
+@use "src/base";
+
+.darker-background-signed {
+  @include base.modal-background;
+  z-index: 2;
+}
+
+.signed-modal-container {
+  @include base.flex-center-column;
+  background-color: base.$light-black-base;
+  justify-content: space-around;
+  border-radius: 8px;
+  height: 210px;
+  width: 350px;
+  padding: 35px;
+}
+
+.signed-modal-container h1 {
+  color: base.$blue-base;
+}
+
+.signed-modal-container a {
+  @include base.button;
+  font-size: 15px;
+  height: 20px;
+}
+
+.signed-modal-container div {
+  display: flex;
+  justify-content: space-around;
+  width: 350px;
+}

@@ -9,3 +9,4 @@ export { default as Header } from './Header';
 export { default as SalaryForm } from './SalaryForm';
 export { default as ShowBalance } from './ShowBalance';
 export { default as ShowDate } from './ShowDate';
+export { default as NotSignedModal } from './NotSignedModal';

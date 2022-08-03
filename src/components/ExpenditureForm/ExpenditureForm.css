@@ -85,3 +85,12 @@ input[type=number] {
   background-color: #337bbe;
   transition: 0.5s;
 }
+
+.expenditure-form input:-webkit-autofill,
+.expenditure-form input:-webkit-autofill:hover,
+.expenditure-form input:-webkit-autofill:focus, 
+.expenditure-form input:-webkit-autofill:active{
+  box-shadow: 0 0 0 20px #1a1b22 inset !important;
+  -webkit-text-fill-color: #d5d4d4c9 !important;
+}
+
