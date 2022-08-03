@@ -14,7 +14,7 @@ function Home() {
           <p>Blizter is your everyday life wallet made to be minimalist and simple to use</p>
           <Link to="/signin">
             Let&apos;s get started
-            <BsArrowRightShort font-size="23px" />
+            <BsArrowRightShort fontSize="23px" />
           </Link>
         </div>
       </section>
