@@ -5,22 +5,18 @@
 }
 
 .salary-form {
-  background-color: #22232f;
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
+  @include base.flex-center-column;
   justify-content: space-around;
+  background-color: base.$light-black-base;
   position: relative;
   border-radius: 8px;
-  text-align: center;
   height: 150px;
   width: 270px;
   padding: 35px;
-  color: rgb(243, 243, 243);
 }
 
 .salary-form > h3 {
-  color: #4685c1;
+  color: base.$blue-base;
   height: 10px;
   margin-bottom: 10px;
 }
@@ -43,23 +39,17 @@ input[type=number] {
   text-align: start;
   margin-top: 10px;
   padding-left: 10px;
-  color: rgba(213, 212, 212, 0.787);
+  color: base.$white-text;
 }
 
 .salary-form .form-error {
-  position: absolute;
-  top: 120px;
-  color: #e55959;
-  margin-top: 5px;
-  font-size: 10px;
+  @include base.form-error;
+  top: 125px;
 }
 
 .salary-form button {
-  all: unset;
+  @include base.button;
+  margin-top: 10px;
   height: 30px;
   width: 190px;
-  margin-top: 20px;
-  background-color: #4685c1;
-  border-radius: 10px;
-  transition: 0.5s;
 }
