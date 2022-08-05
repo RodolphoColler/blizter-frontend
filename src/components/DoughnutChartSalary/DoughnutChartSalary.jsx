@@ -22,9 +22,9 @@ function DoughnutChartSalary() {
   const [lastMonthSalary, setLastMonthSalary] = useState(0);
   const { salary, date } = useContext(BlizterContext);
 
-  const monthComparisonPercentage = (lastMonthSalary - salary) < 0
-    ? Math.abs(((lastMonthSalary * 100) / salary).toFixed(0) - 100)
-    : (Math.abs(((salary * 100) / lastMonthSalary) - 100)).toFixed(0);
+  const monthComparisonPercentage = (lastMonthSalary - salary.value) < 0
+    ? Math.abs(((lastMonthSalary * 100) / salary.value).toFixed(0) - 100)
+    : (Math.abs(((salary.value * 100) / lastMonthSalary) - 100)).toFixed(0);
 
   useEffect(() => {
     getLastMonthSalary(date)
@@ -49,7 +49,7 @@ function DoughnutChartSalary() {
       </div>
       <p>{ `${monthComparisonPercentage}%`}</p>
       <p>
-        {`${(lastMonthSalary - salary) < 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
+        {`${(lastMonthSalary - salary.value) < 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
       </p>
     </div>
   );

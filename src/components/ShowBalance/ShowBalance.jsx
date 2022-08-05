@@ -21,7 +21,7 @@ function ShowBalance({ setIsSalaryFormVisible }) {
   useEffect(() => { if (!salary) setIsSalaryFormVisible(true); }, [salary]);
 
   return (
-    <h2 className="salary">{`Balance $${salary - monthExpenditures}`}</h2>
+    <h2 className="salary">{`Balance $${salary.value - monthExpenditures}`}</h2>
   );
 }
 

@@ -19,7 +19,7 @@ function BarChart() {
     datasets: [{
       label: 'Month expenses',
       backgroundColor: 'rgb(51, 123, 190)',
-      data: [...monthExpenditure.map(({ sum }) => sum), salary].map((number) => (number * 100) / salary),
+      data: [...monthExpenditure.map(({ sum }) => sum), salary.value].map((number) => (number * 100) / salary.value),
     }],
   };
 

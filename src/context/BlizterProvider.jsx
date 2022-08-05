@@ -16,7 +16,7 @@ function BlizterProvider({ children }) {
 
   useEffect(() => {
     getSalary(date)
-      .then((data) => setSalary(data.value))
+      .then((data) => setSalary(data))
       .catch(() => setSalary(0));
   }, [date, isExpenditureFormVisible]);
 
