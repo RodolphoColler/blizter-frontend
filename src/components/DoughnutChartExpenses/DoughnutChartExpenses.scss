@@ -1,0 +1,32 @@
+@use "src/base";
+
+.doughnut-expenses-container {
+  @include base.flex-center-column;
+  position: relative;
+  background-color: base.$light-black-base;
+  border-radius: 10px;
+  width: 45%;
+}
+
+.doughnut-expenses-container p {
+  position: absolute;
+  letter-spacing: 1px;
+  background-image: linear-gradient(40deg, base.$blue-base 3%, base.$green-gradient 100%);
+  font-weight: 800;
+  -webkit-text-fill-color: transparent; 
+  -webkit-background-clip: text;
+}
+
+.doughnut-expenses-container p:nth-child(1) {
+  top: 15px;
+}
+
+.doughnut-expenses-container p:nth-child(3) {
+  -webkit-text-fill-color: base.$blue-base; 
+  font-size: 30px;
+  bottom: 60px;
+}
+
+.doughnut-expenses-container p:nth-child(4) {
+  bottom: 10px;
+}
