@@ -4,14 +4,22 @@ import { useState, useEffect, useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { getMonthExpenditures } from '../../services/request';
 import BlizterContext from '../../context/BlizterContext';
-import './BarChart.css';
+import './BarChart.scss';
 
 function BarChart() {
   const [monthExpenditure, setMonthExpenditure] = useState([]);
   const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
 
+  async function fetchMonthExpenses() {
+    try {
+      setMonthExpenditure(await getMonthExpenditures(date));
+    } catch ({ message }) {
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
+  }
+
   useEffect(() => {
-    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((data) => setMonthExpenditure(data));
+    if (!isExpenditureFormVisible) fetchMonthExpenses();
   }, [date, isExpenditureFormVisible]);
 
   const data = {
