@@ -2,7 +2,7 @@
 import Chart from 'chart.js/auto';
 import { useState, useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import './DoughnutChartExpenses.css';
+import './DoughnutChartExpenses.scss';
 import BlizterContext from '../../context/BlizterContext';
 import { getLastMonthExpenditures, getMonthExpenditures } from '../../services/request';
 
@@ -32,19 +32,28 @@ function sum(numbers) {
 }
 
 function DoughnutChartExpenses() {
-  const [expenses, setExpenses] = useState(0);
-  const [lastMonthExpenses, setLastMonthExpenses] = useState(0);
+  const [monthExpenditures, setMonthExpenditures] = useState(0);
+  const [lastMonthExpenditures, setLastMonthExpenditures] = useState(0);
   const { date, isExpenditureFormVisible } = useContext(BlizterContext);
 
+  async function fetchExpenses() {
+    try {
+      setMonthExpenditures(await sum(getMonthExpenditures(date)));
+
+      setLastMonthExpenditures(await sum(getLastMonthExpenditures(date)));
+    } catch ({ message }) {
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
+  }
+
   useEffect(() => {
-    if (!isExpenditureFormVisible) getMonthExpenditures(date).then((data) => setExpenses(sum(data)));
-    getLastMonthExpenditures(date).then((data) => setLastMonthExpenses(sum(data)));
+    if (!isExpenditureFormVisible) fetchExpenses();
   }, [date, isExpenditureFormVisible]);
 
   const doughnutData = {
     datasets: [
       {
-        data: [getMonthComparison(lastMonthExpenses, expenses), 100 - getMonthComparison(lastMonthExpenses, expenses)],
+        data: [getMonthComparison(lastMonthExpenditures, monthExpenditures), 100 - getMonthComparison(lastMonthExpenditures, monthExpenditures)],
         backgroundColor: ['#336699', '#99CCFF00'],
       },
     ],
@@ -56,9 +65,9 @@ function DoughnutChartExpenses() {
       <div style={ { width: '200px' } }>
         <Doughnut data={ doughnutData } options={ { ...options } } />
       </div>
-      <p>{ `${getMonthComparison(lastMonthExpenses, expenses)}%`}</p>
+      <p>{ `${getMonthComparison(lastMonthExpenditures, monthExpenditures)}%`}</p>
       <p>
-        {`${(lastMonthExpenses - expenses) <= 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
+        {`${(lastMonthExpenditures - monthExpenditures) <= 0 ? 'MORE' : 'LESS'} THAN LAST MONTH`}
       </p>
     </div>
   );
