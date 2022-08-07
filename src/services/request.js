@@ -1,16 +1,13 @@
 import axios from 'axios';
 import moment from 'moment';
+import { lastMonthDate, currentMonthDate } from './dateFormatter';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
-const userDateFormat = 'DD MMMM YYYY';
-
 export async function getUserId() {
   try {
     const { data: { id } } = await axios.get('/token');
-
-    localStorage.setItem('userId', id);
 
     return id;
   } catch (error) {
@@ -24,8 +21,6 @@ export async function SignIn(body) {
 
     axios.defaults.headers.common.Authorization = token;
 
-    await getUserId();
-
     return token;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -37,8 +32,6 @@ export async function createUser(body) {
     const { data: { token } } = await axios.post('/user', body);
 
     axios.defaults.headers.common.Authorization = token;
-
-    await getUserId();
 
     return token;
   } catch (error) {
@@ -59,30 +52,42 @@ export async function createExpenditure(body) {
 }
 
 export async function getCategories() {
-  const { data: { categories } } = await axios.get('/category');
+  try {
+    const { data: { categories } } = await axios.get('/category');
 
-  return categories;
+    return categories;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function getExpenditures(date) {
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
+  try {
+    const formattedDate = currentMonthDate(date);
 
-  const url = `/expenditure/?date=${formattedDate}`;
+    const url = `/expenditure/?date=${formattedDate}`;
 
-  const { data: { expenditures } } = await axios.get(url);
+    const { data: { expenditures } } = await axios.get(url);
 
-  return expenditures;
+    return expenditures;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function deleteExpenditure(id) {
-  const { data: { expenditure } } = await axios.delete(`/expenditure/${id}`);
+  try {
+    const { data: { expenditure } } = await axios.delete(`/expenditure/${id}`);
 
-  return expenditure;
+    return expenditure;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function getSalary(date) {
   try {
-    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
+    const formattedDate = currentMonthDate(date);
 
     const url = `/salary?date=${formattedDate}`;
 
@@ -96,7 +101,7 @@ export async function getSalary(date) {
 
 export async function getLastMonthSalary(date) {
   try {
-    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
+    const formattedDate = lastMonthDate(date);
 
     const url = `/salary?date=${formattedDate}`;
 
@@ -109,16 +114,20 @@ export async function getLastMonthSalary(date) {
 }
 
 export async function createSalary(value, date) {
-  const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
+  try {
+    const formattedDate = currentMonthDate(date);
 
-  const { data: { salary } } = await axios.post('/salary', { value, date: formattedDate });
+    const { data: { salary } } = await axios.post('/salary', { value, date: formattedDate });
 
-  return salary.value;
+    return salary;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
 }
 
 export async function getLastMonthExpenditures(date) {
   try {
-    const formattedDate = moment(date, userDateFormat).subtract(1, 'month').format('YYYY-MM-') + moment().subtract(1, 'month').daysInMonth();
+    const formattedDate = lastMonthDate(date);
 
     const url = `/expenditure/month?date=${formattedDate}`;
 
@@ -132,7 +141,7 @@ export async function getLastMonthExpenditures(date) {
 
 export async function getMonthExpenditures(date) {
   try {
-    const formattedDate = moment(date, userDateFormat).format('YYYY-MM-') + moment(new Date(date)).daysInMonth();
+    const formattedDate = currentMonthDate(date);
 
     const url = `/expenditure/month?date=${formattedDate}`;
 
