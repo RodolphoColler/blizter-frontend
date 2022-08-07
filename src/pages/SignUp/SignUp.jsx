@@ -31,6 +31,17 @@ function SignUp() {
 
   useEffect(() => { setFormError(''); }, [email, name, password, confirmPassword]);
 
+  useEffect(() => {
+    try {
+      if (localStorage.getItem('token')) {
+        getUserId();
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      setFormError('');
+    }
+  }, []);
+
   return (
     <main className="signup-page">
       <div className="signup-welcome">
