@@ -1,23 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Expenditures, ExpenditureForm, Header, SalaryForm, ShowDate, BarChart, DoughnutChartSalary, DoughnutChartExpenses, ShowBalance, NotSignedModal } from '../../components';
 import BlizterContext from '../../context/BlizterContext';
-import { getUserId } from '../../services/request';
 import './Dashboard.scss';
 
 function Dashboard() {
   const [isSalaryFormVisible, setIsSalaryFormVisible] = useState(false);
-  const [isSignedModalVisible, setIsSignedModalVisible] = useState(false);
-  const { setIsExpenditureFormVisible, isExpenditureFormVisible } = useContext(BlizterContext);
-
-  async function validateSign() {
-    try {
-      await getUserId();
-    } catch (error) {
-      setIsSignedModalVisible(true);
-    }
-  }
-
-  useEffect(() => { validateSign(); }, []);
+  const { setIsExpenditureFormVisible, isExpenditureFormVisible, isSignedModalVisible } = useContext(BlizterContext);
 
   return (
     <>

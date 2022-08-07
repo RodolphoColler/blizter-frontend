@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 const userDateFormat = 'DD MMMM YYYY';
 
 export function lastMonthDate(date) {

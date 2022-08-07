@@ -8,16 +8,25 @@ function BlizterProvider({ children }) {
   const [date, setDate] = useState(moment().format('DD MMMM YYYY'));
   const [dateCount, setDateCount] = useState(0);
   const [salary, setSalary] = useState(1);
+  const [isSignedModalVisible, setIsSignedModalVisible] = useState(false);
   const [isExpenditureFormVisible, setIsExpenditureFormVisible] = useState(false);
 
   useEffect(() => {
     setDate(moment().subtract(dateCount, 'month').format('DD MMMM YYYY'));
   }, [dateCount]);
 
+  async function fetchSalary() {
+    try {
+      setSalary(await getSalary(date));
+    } catch ({ message }) {
+      setSalary(0);
+
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
+  }
+
   useEffect(() => {
-    getSalary(date)
-      .then((data) => setSalary(data))
-      .catch(() => setSalary(0));
+    fetchSalary();
   }, [date, isExpenditureFormVisible]);
 
   return (
@@ -30,6 +39,8 @@ function BlizterProvider({ children }) {
         setSalary,
         isExpenditureFormVisible,
         setIsExpenditureFormVisible,
+        setIsSignedModalVisible,
+        isSignedModalVisible,
       } }
     >
       {children}
