@@ -38,9 +38,9 @@ function DoughnutChartExpenses() {
 
   async function fetchExpenses() {
     try {
-      setMonthExpenditures(await sum(getMonthExpenditures(date)));
+      setMonthExpenditures(sum(await getMonthExpenditures(date)));
 
-      setLastMonthExpenditures(await sum(getLastMonthExpenditures(date)));
+      setLastMonthExpenditures(sum(await getLastMonthExpenditures(date)));
     } catch ({ message }) {
       if (message.includes('token')) setIsSignedModalVisible(true);
     }
