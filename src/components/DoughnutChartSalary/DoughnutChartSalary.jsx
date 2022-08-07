@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { useState, useEffect, useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { getLastMonthSalary } from '../../services/request';
-import './DoughnutChartSalary.css';
+import './DoughnutChartSalary.scss';
 import BlizterContext from '../../context/BlizterContext';
 
 const options = {
@@ -26,11 +26,18 @@ function DoughnutChartSalary() {
     ? Math.abs(((lastMonthSalary * 100) / salary.value).toFixed(0) - 100)
     : (Math.abs(((salary.value * 100) / lastMonthSalary) - 100)).toFixed(0);
 
-  useEffect(() => {
-    getLastMonthSalary(date)
-      .then(({ value }) => setLastMonthSalary(value))
-      .catch(() => setLastMonthSalary(0));
-  }, [date]);
+  async function fetchLastMonthSalary() {
+    try {
+      const { value } = await getLastMonthSalary(date);
+      setLastMonthSalary(value);
+    } catch ({ message }) {
+      setLastMonthSalary(0);
+
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
+  }
+
+  useEffect(() => { fetchLastMonthSalary(); }, [date]);
 
   const doughnutData = {
     datasets: [
