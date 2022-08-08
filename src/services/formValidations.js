@@ -7,6 +7,11 @@ function validateCredentials(email, password) {
   if (password.length < minPasswordLength) throw new Error('Password need to have at least 7 characters.');
 }
 
+function validateValue(value) {
+  if (!value) throw new Error('Value cannot be empty.');
+  if (value === '0') throw new Error('Value cannot be zero.');
+}
+
 export function validateSignUp(email, name, password, confirmPassword) {
   validateCredentials(email, password);
 
@@ -20,7 +25,10 @@ export function validateSignIn(email, password) {
 
 export function validateExpenditure(description, value, date) {
   if (!description) throw new Error('Description cannot be empty.');
-  if (!value) throw new Error('Value cannot be empty.');
-  if (value === '0') throw new Error('Value cannot be zero.');
+  validateValue(value);
   if (!date) throw new Error('Date cannot be empty.');
+}
+
+export default function validateSalary(value) {
+  validateValue(value);
 }
