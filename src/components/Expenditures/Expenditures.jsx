@@ -2,11 +2,11 @@ import { useEffect, useContext, useState } from 'react';
 import { ExpenditureDropDown } from '..';
 import { getExpenditures } from '../../services/request';
 import BlizterContext from '../../context/BlizterContext';
-import './Expenditures.css';
+import './Expenditures.scss';
 
 function Expenditures() {
   const [expenditures, setExpenditures] = useState([]);
-  const { date, isExpenditureFormVisible } = useContext(BlizterContext);
+  const { date, isExpenditureFormVisible, setIsSignedModalVisible } = useContext(BlizterContext);
 
   function arrayToObject(expends) {
     const expenditureObject = {};
@@ -22,16 +22,20 @@ function Expenditures() {
     return expenditureObject;
   }
 
-  async function formattedExpenditures() {
-    const expends = await getExpenditures(date);
+  async function fetchExpenditures() {
+    try {
+      const expends = await getExpenditures(date);
 
-    const formattedObject = arrayToObject(expends);
+      const formattedObject = arrayToObject(expends);
 
-    return formattedObject;
+      setExpenditures(formattedObject);
+    } catch ({ message }) {
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
   }
 
   useEffect(() => {
-    if (!isExpenditureFormVisible) formattedExpenditures().then((data) => setExpenditures(data));
+    if (!isExpenditureFormVisible) fetchExpenditures();
   }, [date, isExpenditureFormVisible]);
 
   return (
