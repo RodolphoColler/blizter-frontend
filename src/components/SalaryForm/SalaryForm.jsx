@@ -3,32 +3,29 @@
 import PropTypes from 'prop-types';
 import { useContext, useState } from 'react';
 import BlizterContext from '../../context/BlizterContext';
+import validateSalary from '../../services/formValidations';
 import { createSalary } from '../../services/request';
 import './SalaryForm.scss';
 
 function SalaryForm({ setIsSalaryFormVisible }) {
   const [value, setValue] = useState('');
   const [formError, setFormError] = useState('');
-  const { setSalary, date, salary } = useContext(BlizterContext);
-
-  function validateForm() {
-    if (!value) throw new Error('Value cannot be empty.');
-    if (value === '0') throw new Error('Value cannot be zero.');
-  }
+  const { setSalary, date, salary, setIsSignedModalVisible } = useContext(BlizterContext);
 
   async function handleSubmit(event) {
     try {
       event.preventDefault();
 
-      validateForm();
+      validateSalary(value);
 
       const newSalary = await createSalary(Number(value), date);
 
       setSalary(newSalary);
 
       setIsSalaryFormVisible(false);
-    } catch (error) {
-      setFormError(error.message);
+    } catch ({ message }) {
+      setFormError(message);
+      if (message.includes('token')) setIsSignedModalVisible(true);
     }
   }
 
