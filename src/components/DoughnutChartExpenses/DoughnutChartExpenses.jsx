@@ -34,7 +34,7 @@ function sum(numbers) {
 function DoughnutChartExpenses() {
   const [monthExpenditures, setMonthExpenditures] = useState(0);
   const [lastMonthExpenditures, setLastMonthExpenditures] = useState(0);
-  const { date, isExpenditureFormVisible } = useContext(BlizterContext);
+  const { date, isExpenditureFormVisible, setIsSignedModalVisible } = useContext(BlizterContext);
 
   async function fetchExpenses() {
     try {

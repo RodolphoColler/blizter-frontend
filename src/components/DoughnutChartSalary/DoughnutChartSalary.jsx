@@ -20,7 +20,7 @@ const options = {
 
 function DoughnutChartSalary() {
   const [lastMonthSalary, setLastMonthSalary] = useState(0);
-  const { salary, date } = useContext(BlizterContext);
+  const { salary, date, setIsSignedModalVisible } = useContext(BlizterContext);
 
   const monthComparisonPercentage = (lastMonthSalary - salary.value) < 0
     ? Math.abs(((lastMonthSalary * 100) / salary.value).toFixed(0) - 100)
