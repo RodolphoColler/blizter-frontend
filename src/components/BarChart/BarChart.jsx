@@ -8,7 +8,7 @@ import './BarChart.scss';
 
 function BarChart() {
   const [monthExpenditure, setMonthExpenditure] = useState([]);
-  const { salary, date, isExpenditureFormVisible } = useContext(BlizterContext);
+  const { salary, date, isExpenditureFormVisible, setIsSignedModalVisible } = useContext(BlizterContext);
 
   async function fetchMonthExpenses() {
     try {
