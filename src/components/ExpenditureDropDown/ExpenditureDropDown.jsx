@@ -8,7 +8,7 @@ import './ExpenditureDropDown.scss';
 function ExpenditureDropDown({ category, expenditures }) {
   const [open, setOpen] = useState(false);
   const [expendituresByCategory, setExpendituresByCategory] = useState([]);
-  const { setIsExpenditureFormVisible } = useContext(BlizterContext);
+  const { setIsExpenditureFormVisible, setIsSignedModalVisible } = useContext(BlizterContext);
 
   function updateState(state) {
     if (state === null) return false;
@@ -19,12 +19,15 @@ function ExpenditureDropDown({ category, expenditures }) {
   useEffect(() => setExpendituresByCategory(expenditures), [expenditures]);
 
   async function removeExpenditure({ currentTarget }) {
-    const deletedExpenditure = await deleteExpenditure(currentTarget.id);
+    try {
+      const deletedExpenditure = await deleteExpenditure(currentTarget.id);
+      const newExpenditures = expendituresByCategory.filter(({ id }) => id !== deletedExpenditure.id);
 
-    const newExpenditures = expendituresByCategory.filter(({ id }) => id !== deletedExpenditure.id);
-
-    setExpendituresByCategory(newExpenditures);
-    setIsExpenditureFormVisible((prev) => updateState(prev));
+      setExpendituresByCategory(newExpenditures);
+      setIsExpenditureFormVisible((prev) => updateState(prev));
+    } catch ({ message }) {
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
   }
 
   return (

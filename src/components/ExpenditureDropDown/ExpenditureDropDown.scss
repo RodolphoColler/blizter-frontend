@@ -6,7 +6,7 @@
   background-color: #232430;
   height: 40px;
   text-align: center;
-  color: #f1f0f0;
+  color: base.$white-text;
   margin-top: 13px;
   border-radius: 10px;
   transition: 0.2s ease-in;
@@ -23,15 +23,9 @@
 
 ul {
   all: unset;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include base.flex-center;
   flex-wrap: wrap;
   width: 320px;
-}
-
-ul > div {
-  display: flex;
 }
 
 .expend-item {
@@ -58,12 +52,12 @@ ul > div {
   opacity: 0;
   height: 15px;
   transition: 0.1s ease-in;
-  color: rgba(255, 0, 0, 0.824);
+  color: rgba(255, 0, 0, 0.8);
 }
 
 .expend-item:hover button {
-  transition: 0.3s ease-in;
   cursor: pointer;
+  transition: 0.3s ease-in;
   opacity: 1;
 }
 
