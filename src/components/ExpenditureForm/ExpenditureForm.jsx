@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from 'react';
 import { validateExpenditure } from '../../services/formValidations';
 import { createExpenditure, getCategories } from '../../services/request';
 import BlizterContext from '../../context/BlizterContext';
-import './ExpenditureForm.css';
+import './ExpenditureForm.scss';
 
 function ExpenditureForm() {
   const [categories, setCategories] = useState([]);
@@ -13,10 +13,18 @@ function ExpenditureForm() {
   const [category, setCategory] = useState(1);
   const [date, setDate] = useState('');
   const [formError, setFormError] = useState('');
-  const { setIsExpenditureFormVisible } = useContext(BlizterContext);
+  const { setIsExpenditureFormVisible, setIsSignedModalVisible } = useContext(BlizterContext);
+
+  async function fetchCategories() {
+    try {
+      setCategories(await getCategories());
+    } catch ({ message }) {
+      if (message.includes('token')) setIsSignedModalVisible(true);
+    }
+  }
 
   useEffect(() => {
-    getCategories().then((data) => setCategories(data));
+    fetchCategories();
   }, []);
 
   async function handleSubmit(event) {
@@ -28,8 +36,9 @@ function ExpenditureForm() {
       await createExpenditure({ description, value: Number(value), date, categoryId: Number(category) });
 
       setIsExpenditureFormVisible(false);
-    } catch (error) {
-      setFormError(error.message);
+    } catch ({ message }) {
+      setFormError(message);
+      if (message.includes('token')) setIsSignedModalVisible(true);
     }
   }
 
