@@ -3,7 +3,7 @@ import moment from 'moment';
 import { lastMonthDate, currentMonthDate } from './dateFormatter';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.headers.common.Authorization = localStorage.getItem('token');
+axios.defaults.withCredentials = true;
 
 export async function getUserId() {
   try {
@@ -19,8 +19,6 @@ export async function SignIn(body) {
   try {
     const { data: { token } } = await axios.post('/login', body);
 
-    axios.defaults.headers.common.Authorization = token;
-
     return token;
   } catch (error) {
     throw new Error(error.response.data.message);
@@ -30,8 +28,6 @@ export async function SignIn(body) {
 export async function createUser(body) {
   try {
     const { data: { token } } = await axios.post('/user', body);
-
-    axios.defaults.headers.common.Authorization = token;
 
     return token;
   } catch (error) {
