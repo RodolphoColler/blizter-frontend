@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormError from '../../components/FormError/FormError';
 import { validateSignIn } from '../../services/formValidations';
-import { getUserId, SignIn } from '../../services/request';
+import { SignIn, validateToken } from '../../services/request';
 import './SignIn.scss';
 
 function SingIn() {
@@ -17,9 +17,7 @@ function SingIn() {
     try {
       validateSignIn(email, password);
 
-      const token = await SignIn({ email, password });
-
-      localStorage.setItem('token', token);
+      await SignIn({ email, password });
 
       navigate('/dashboard');
     } catch (error) {
@@ -27,18 +25,19 @@ function SingIn() {
     }
   }
 
-  useEffect(() => { setFormError(''); }, [email, password]);
-
-  useEffect(() => {
+  async function shouldUserRedirect() {
     try {
-      if (localStorage.getItem('token')) {
-        getUserId();
-        navigate('/dashboard');
-      }
+      await validateToken();
+
+      navigate('/dashboard');
     } catch (error) {
       setFormError('');
     }
-  }, []);
+  }
+
+  useEffect(() => { shouldUserRedirect(); }, []);
+
+  useEffect(() => { setFormError(''); }, [email, password]);
 
   return (
     <main className="signin-page">
