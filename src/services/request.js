@@ -5,7 +5,7 @@ import { lastMonthDate, currentMonthDate } from './dateFormatter';
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.withCredentials = true;
 
-export async function getUserId() {
+export async function validateToken() {
   try {
     const { data: { id } } = await axios.get('/token');
 
@@ -17,9 +17,7 @@ export async function getUserId() {
 
 export async function SignIn(body) {
   try {
-    const { data: { token } } = await axios.post('/login', body);
-
-    return token;
+    await axios.post('/login', body);
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -27,9 +25,7 @@ export async function SignIn(body) {
 
 export async function createUser(body) {
   try {
-    const { data: { token } } = await axios.post('/user', body);
-
-    return token;
+    await axios.post('/user', body);
   } catch (error) {
     throw new Error(error.response.data.message);
   }
