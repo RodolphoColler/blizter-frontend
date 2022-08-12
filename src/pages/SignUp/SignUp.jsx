@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FormError from '../../components/FormError/FormError';
 import { validateSignUp } from '../../services/formValidations';
-import { createUser } from '../../services/request';
+import { createUser, validateToken } from '../../services/request';
 import './SignUp.scss';
 
 function SignUp() {
@@ -19,9 +19,7 @@ function SignUp() {
     try {
       validateSignUp(email, name, password, confirmPassword);
 
-      const token = await createUser({ email, name, password });
-
-      localStorage.setItem('token', token);
+      await createUser({ email, name, password });
 
       navigate('/dashboard');
     } catch (error) {
@@ -29,18 +27,19 @@ function SignUp() {
     }
   }
 
-  useEffect(() => { setFormError(''); }, [email, name, password, confirmPassword]);
-
-  useEffect(() => {
+  async function shouldUserRedirect() {
     try {
-      if (localStorage.getItem('token')) {
-        getUserId();
-        navigate('/dashboard');
-      }
+      await validateToken();
+
+      navigate('/dashboard');
     } catch (error) {
       setFormError('');
     }
-  }, []);
+  }
+
+  useEffect(() => { shouldUserRedirect(); }, []);
+
+  useEffect(() => { setFormError(''); }, [email, name, password, confirmPassword]);
 
   return (
     <main className="signup-page">
