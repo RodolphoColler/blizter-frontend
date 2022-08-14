@@ -13,8 +13,8 @@
   letter-spacing: 1px;
   background-image: linear-gradient(40deg, base.$blue-base 3%, base.$green-gradient 100%);
   font-weight: 800;
+  background-clip: text;
   -webkit-text-fill-color: transparent; 
-  -webkit-background-clip: text;
 }
 
 .doughnut-expenses-container p:nth-child(1) {
