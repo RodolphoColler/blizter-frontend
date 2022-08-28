@@ -8,7 +8,7 @@ function Home() {
     <main className="home-page">
       <Header />
       <section className="home-content">
-        <img src="https://i.imgur.com/xHWmG2H.png" alt="" />
+        <img src="https://i.imgur.com/xHWmG2H.png" alt="" fetchpriority="high" />
         <div className="text-container">
           <p>Easy and better way to get in day with your financial life</p>
           <p>Blizter is your everyday life wallet made to be minimalist and simple to use</p>
