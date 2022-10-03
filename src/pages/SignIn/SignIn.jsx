@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FormError from '../../components/FormError/FormError';
+import { GoogleButton, FormError } from '../../components';
 import { validateSignIn } from '../../services/formValidations';
 import { SignIn, validateToken } from '../../services/request';
 import './SignIn.scss';
@@ -67,6 +67,7 @@ function SingIn() {
           <FormError error={ formError } />
           <button type="submit">Sign in</button>
         </form>
+        <GoogleButton endpoint="/signin/social" />
         <p>or</p>
         <button type="button" className="signup-button" onClick={ () => navigate('/signup') }>Create account</button>
       </div>
