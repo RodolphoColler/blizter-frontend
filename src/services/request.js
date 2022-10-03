@@ -17,7 +17,7 @@ export async function validateToken() {
 
 export async function SignIn(body) {
   try {
-    await axios.post('/login', body);
+    await axios.post('/signin', body);
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -29,6 +29,14 @@ export async function createUser(body) {
   } catch (error) {
     throw new Error(error.response.data.message);
   }
+}
+
+export async function createOrSignSocialUser(token, endpoint) {
+  await axios.post(endpoint, {}, {
+    headers: {
+      Authorization: token,
+    },
+  });
 }
 
 export async function createExpenditure(body) {
@@ -113,6 +121,7 @@ export async function createSalary(value, date) {
 
     return salary;
   } catch (error) {
+    console.log(error);
     throw new Error(error.response.data.message);
   }
 }
