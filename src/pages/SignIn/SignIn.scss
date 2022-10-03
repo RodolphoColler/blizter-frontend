@@ -10,6 +10,13 @@
   background-color: #171821;
 }
 
+.signin-page > div {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 320px;
+}
+
 .signin-page h1 {
   font-size: 40px;
   color: base.$blue-base;

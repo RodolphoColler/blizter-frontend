@@ -35,7 +35,7 @@
 .signup-page aside > div {
   @include base.flex-center;
   flex-direction: column;
-  height: 370px;
+  height: 440px;
   width: 320px;
 }
 
@@ -61,7 +61,7 @@
 
 .signup-form .form-error {
   @include base.form-error;
-  top: 210px;
+  top: 225px;
 }
 
 .signup-form button {
@@ -81,7 +81,7 @@ aside p {
   @include base.button;
   font-size: 15px;
   height: 60px;
-  width: 100%;
+  width: 320px;
 }
 
 .signup-form input:-webkit-autofill,
