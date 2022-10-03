@@ -1,8 +1,15 @@
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { createOrSignSocialUser } from '../../services/request';
 
-function GoogleButton() {
-  function handleCredentialResponse(response) {
-    jwt_decode(response.credential);
+function GoogleButton({ endpoint }) {
+  const navigate = useNavigate();
+
+  async function handleCredentialResponse(response) {
+    await createOrSignSocialUser(response.credential, endpoint);
+
+    navigate('/dashboard');
   }
 
   useEffect(() => {
@@ -13,7 +20,7 @@ function GoogleButton() {
 
     google.accounts.id.renderButton(
       document.getElementById('buttonDiv'),
-      { theme: 'outline', size: 'large', text: 'sign_in_with', width: '300' },
+      { theme: 'outline', size: 'large', text: 'sign_in_with', width: '320' },
     );
 
     google.accounts.id.prompt();
@@ -21,5 +28,9 @@ function GoogleButton() {
 
   return <div id="buttonDiv" />;
 }
+
+GoogleButton.propTypes = {
+  endpoint: PropTypes.string.isRequired,
+};
 
 export default GoogleButton;
