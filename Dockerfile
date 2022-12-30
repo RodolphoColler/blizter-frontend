@@ -8,4 +8,6 @@ RUN npm install
 
 COPY . .
 
+ENV GENERATE_SOURCEMAP=false
+
 CMD ["npm", "start"]
