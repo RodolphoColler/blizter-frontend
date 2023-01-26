@@ -19,7 +19,9 @@ function SignUp() {
     try {
       validateSignUp(email, name, password, confirmPassword);
 
-      await createUser({ email, name, password });
+      const token = await createUser({ email, name, password });
+
+      localStorage.setItem('token', token);
 
       navigate('/dashboard');
     } catch (error) {

@@ -3,7 +3,7 @@ import moment from 'moment';
 import { lastMonthDate, currentMonthDate } from './dateFormatter';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.withCredentials = true;
+axios.defaults.headers.common.Authorization = localStorage.getItem('token');
 
 export async function validateToken() {
   try {
@@ -17,7 +17,11 @@ export async function validateToken() {
 
 export async function SignIn(body) {
   try {
-    await axios.post('/signin', body);
+    const { data: { token } } = await axios.post('/signin', body);
+
+    axios.defaults.headers.common.Authorization = token;
+
+    return token;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
@@ -25,18 +29,24 @@ export async function SignIn(body) {
 
 export async function createUser(body) {
   try {
-    await axios.post('/user', body);
+    const { data: { token } } = await axios.post('/user', body);
+
+    axios.defaults.headers.common.Authorization = token;
+
+    return token;
   } catch (error) {
     throw new Error(error.response.data.message);
   }
 }
 
 export async function createOrSignSocialUser(token, endpoint) {
-  await axios.post(endpoint, {}, {
+  const { data } = await axios.post(endpoint, {}, {
     headers: {
       Authorization: token,
     },
   });
+
+  axios.defaults.headers.common.Authorization = data.token;
 }
 
 export async function createExpenditure(body) {
@@ -121,7 +131,6 @@ export async function createSalary(value, date) {
 
     return salary;
   } catch (error) {
-    console.log(error);
     throw new Error(error.response.data.message);
   }
 }

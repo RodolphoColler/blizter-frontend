@@ -17,7 +17,9 @@ function SingIn() {
     try {
       validateSignIn(email, password);
 
-      await SignIn({ email, password });
+      const token = await SignIn({ email, password });
+
+      localStorage.setItem('token', token);
 
       navigate('/dashboard');
     } catch (error) {

@@ -7,7 +7,9 @@ function GoogleButton({ endpoint }) {
   const navigate = useNavigate();
 
   async function handleCredentialResponse(response) {
-    await createOrSignSocialUser(response.credential, endpoint);
+    const token = await createOrSignSocialUser(response.credential, endpoint);
+
+    localStorage.setItem('token', token);
 
     navigate('/dashboard');
   }
