@@ -8,7 +8,7 @@ import './Home.scss';
 async function callApi() {
   const baseApiUrl = process.env.REACT_APP_API_URL;
 
-  const response = await axios.get(baseApiUrl);
+  const response = await axios.get(`${baseApiUrl}/user`);
 
   return response.data.message;
 }
